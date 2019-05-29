@@ -8,7 +8,7 @@ retropower: retroPower/main.c
 	$(CC) $< $(LIBS) -o $@
 
 install:
-	mv $(EXECS) /usr/bin
+	mv $(EXECS) $(DESTDIR)/usr/bin
 
 clean:
 	rm -f $(EXECS)
