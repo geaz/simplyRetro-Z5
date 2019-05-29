@@ -1,10 +1,10 @@
-EXECS  = retroPower
+EXECS  = retropower
 LIBS   = -lwiringPi
 CC     = gcc $(CFLAGS)
 
 all: $(EXECS)
 
-retrogame: retroPower/main.c
+retropower: main.c
 	$(CC) $< $(LIBS) -o $@
 
 install:
