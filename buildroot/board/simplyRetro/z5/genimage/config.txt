@@ -1,0 +1,24 @@
+kernel=zImage
+
+boot_delay=0
+disable_splash=1
+disable_overscan=1
+display_rotate=2
+
+hdmi_force_hotplug=1
+config_hdmi_boost=7
+hdmi_group=2
+hdmi_mode=87
+hdmi_drive=2
+hdmi_cvt=800 480 60 6 0 0 0
+
+dtoverlay=pi3-disable-bt
+dtoverlay=gpio-poweroff,gpiopin=7,active_low=1
+dtparam=spi=on
+dtparam=audio=on
+
+gpu_mem_256=128
+gpu_mem_512=256
+gpu_mem_1024=448
+avoid_safe_mode=1
+dtoverlay=pi3-miniuart-bt

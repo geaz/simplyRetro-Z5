@@ -1,0 +1,22 @@
+--- a/Makefile
++++ b/Makefile
+@@ -13,7 +13,6 @@ all: $(EXECS)
+ 
+ retrogame: retrogame.c keyTable.h
+ 	$(CC) $< $(LIBS) -o $@
+-	strip $@
+ 
+ # KEYFILE = /usr/include/linux/input.h
+ KEYFILE = /usr/include/linux/input-event-codes.h
+@@ -22,10 +21,9 @@ keyTable.h: keyTableGen.sh $(KEYFILE)
+ 
+ gamera: gamera.c
+ 	$(CC) $< -lncurses -lmenu -lexpat -o $@
+-	strip $@
+ 
+ install:
+-	mv $(EXECS) /usr/local/bin
++	mv $(EXECS) $(DESTDIR)/usr/bin
+ 
+ clean:
+ 	rm -f $(EXECS) keyTable.h

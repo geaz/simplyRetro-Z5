@@ -1,0 +1,23 @@
+config BR2_PACKAGE_EMULATION_STATION
+	bool "Emulationstation 2 (RetroPie)"
+	depends on BR2_INSTALL_LIBSTDCPP
+	depends on BR2_PACKAGE_SDL2
+	depends on BR2_PACKAGE_ALSA_LIB
+	depends on BR2_PACKAGE_BOOST
+	select BR2_PACKAGE_FREEIMAGE
+	select BR2_PACKAGE_FREETYPE
+	select BR2_PACKAGE_DEJAVU
+	select BR2_PACKAGE_RAPIDJSON
+	select BR2_PACKAGE_LIBCURL
+	select BR2_PACKAGE_VLC
+	select BR2_PACKAGE_BOOST_LAYOUT_SYSTEM
+	select BR2_PACKAGE_BOOST_DATE_TIME
+	select BR2_PACKAGE_BOOST_FILESYSTEM
+	help
+	  A multi emulator frontend.
+
+	  https://github.com/RetroPie/EmulationStation
+
+comment "Emulationstation 2 (RetroPie) needs a toolchain w/ C++, ALSA, BOOST, GLES, SDL2"
+	depends on !BR2_INSTALL_LIBSTDCPP || !BR2_PACKAGE_SDL2 ||\
+		!BR2_PACKAGE_ALSA_LIB || !BR2_PACKAGE_BOOST
