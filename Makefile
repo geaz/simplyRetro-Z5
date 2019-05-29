@@ -4,7 +4,7 @@ CC     = gcc $(CFLAGS)
 
 all: $(EXECS)
 
-retropower: main.c
+retropower: retroPower/main.c
 	$(CC) $< $(LIBS) -o $@
 
 install:
