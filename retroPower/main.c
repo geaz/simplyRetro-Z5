@@ -1,17 +1,17 @@
 #include <time.h>
 #include <wiringPi.h>
 #include <stdlib.h>
+#include <stdio.h>
 
 time_t shutdownPressedOn;
 
 int main() 
 {
     wiringPiSetup();
-    pinMode(19, INPUT);
-
+    pinMode(24, INPUT); // WiringPi24 = GPIO 19
     while(1) 
     {
-        if(digitalRead(1) == 1) 
+        if(digitalRead(24) == 1) 
         {
             if(shutdownPressedOn == 0) 
             {
@@ -19,7 +19,7 @@ int main()
             }
             else if(time(0) >= shutdownPressedOn + 3) 
             {
-                system("shutdown -P now");
+                system("poweroff");
             }            
         }
         else if(shutdownPressedOn != 0) {
