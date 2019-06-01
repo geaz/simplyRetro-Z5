@@ -4,12 +4,13 @@
 #
 ################################################################################
 
-RETROPOWER_VERSION = 01d3978749e4b9772ba89b8908dabaaa2915843f
-RETROPOWER_SITE = $(call github,geaz,simplyRetro-z5,$(RETROPOWER_VERSION))
+RETROPOWER_VERSION = v1.0
+RETROPOWER_SITE = git://github.com/geaz/simplyRetro-z5
+RETROPOWER_SITE_METHOD = git
 RETROPOWER_DEPENDENCIES = wiringpi
 
 define RETROPOWER_BUILD_CMDS
-	$(MAKE) CXX="$(TARGET_CXX)" CC="$(TARGET_CC)" LD="$(TARGET_LD)" -C $(@D) all
+	$(MAKE) CXX="$(TARGET_CXX) -lm" CC="$(TARGET_CC) -lm" LD="$(TARGET_LD) -lm" -C $(@D) all
 endef
 
 define RETROPOWER_INSTALL_TARGET_CMDS
