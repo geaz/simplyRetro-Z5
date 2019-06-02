@@ -25,7 +25,6 @@ null::sysinit:/bin/ln -sf /proc/self/fd/0 /dev/stdin
 null::sysinit:/bin/ln -sf /proc/self/fd/1 /dev/stdout
 null::sysinit:/bin/ln -sf /proc/self/fd/2 /dev/stderr
 ::sysinit:/bin/hostname -F /etc/hostname
-::sysinit:/usr/bin/clear
 # now run any rc scripts
 ::sysinit:/etc/init.d/rcS
 

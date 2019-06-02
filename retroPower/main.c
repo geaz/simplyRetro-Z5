@@ -5,6 +5,8 @@
 #include <math.h>
 #include <signal.h>
 #include <string.h>
+#include <stdbool.h>
+#include <unistd.h>
 
 #include <wiringPi.h>
 #include <wiringPiSPI.h>
@@ -15,26 +17,33 @@
 #define DIVIDER_R1 6800.0
 #define DIVIDER_R2 10000.0
 
-#define BAT_MIN 3.65
-#define BAT_MAX 4.05
+#define BAT_MIN 3.4
+#define BAT_MAX 4.2
 #define GPIO_MAX 3.3
 
 time_t shutdownPressedOn = 0;
-time_t lastUsbCheck = 0;
 time_t lastBatCheck = 0;
 
-int checkUsbIntervalInSec = 1;
+int checkIntervalInSec = 5;
 int checkBatIntervalInSec = 10;
 
 char lastShownImage[50];
+bool debug = false;
 
+char iconName[] = "battery";
+char filePath[] = "/root/.retropower/";
+char extension[] = ".png";
+char iconFilePath[50];
+
+void checkDebug(int argc, char *argv[]);
 void checkPowerOff();
 void checkBat();
 float voltageDivider(float r1, float r2, float vin);
 int analogPowerRead(int adcnum);
 
-int main() 
+int main(int argc, char *argv[]) 
 {
+    checkDebug(argc, argv);    
     wiringPiSetup();
     wiringPiSPISetup(0, 4*1000*1000);
     pinMode(24, INPUT); // WiringPi24 = GPIO 19 - The PowerOff Pin
@@ -43,23 +52,29 @@ int main()
     {
         checkPowerOff();
         checkBat();
+        sleep(checkIntervalInSec);
+    }
+}
+
+void checkDebug(int argc, char *argv[])
+{
+    if(argc > 1 && strcmp(argv[1], "debug") == 0)
+    {
+        debug = true;
     }
 }
 
 void checkPowerOff()
 {
-    if(digitalRead(24) == 1) 
+    if(shutdownPressedOn == 0 && digitalRead(24) == 1)
     {
-        if(shutdownPressedOn == 0) 
-        {
-            shutdownPressedOn = time(0);
-        }
-        else if(time(0) >= shutdownPressedOn + 3) 
-        {
-            system("poweroff");
-        }            
+        shutdownPressedOn = time(0);
     }
-    else if(shutdownPressedOn != 0) 
+    else if(shutdownPressedOn != 0 && digitalRead(24) == 1)
+    {
+        system("poweroff");
+    }
+    else
     {
         shutdownPressedOn = 0;
     }
@@ -67,9 +82,13 @@ void checkPowerOff()
 
 void checkBat()
 {
-    if(lastUsbCheck == 0 || time(0) >= lastUsbCheck + checkUsbIntervalInSec)
+    if(analogPowerRead(1) > 0)
     {
-        lastUsbCheck = time(0);
+        sprintf(iconFilePath, "%s%s-%s%s", filePath, iconName, "charging", extension);
+    }
+    else if(lastBatCheck == 0 || time(0) >= lastBatCheck + checkBatIntervalInSec)
+    {
+        lastBatCheck = time(0);
 
         // The Max Voltage we get from the BAT Pin
         float maxVoltageBat = voltageDivider(DIVIDER_R1, DIVIDER_R2, BAT_MAX);
@@ -91,52 +110,52 @@ void checkBat()
          
         int roundedBatPercentage = round(batPercentage*100);
 
-        char iconName[] = "battery";
-        char filePath[] = "/root/.retropower/";
-        char extension[] = ".png";
-        char iconFilePath[50];
-
-        if(analogPowerRead(1) > 0) 
+        if(roundedBatPercentage < 2)
         {
-            sprintf(iconFilePath, "%s%s-%s%s", filePath, iconName, "charging", extension);
+            system("poweroff");
         }
-        else if(lastBatCheck == 0 || time(0) >= lastBatCheck + checkBatIntervalInSec)
+        else if(roundedBatPercentage < 10)
         {
-            lastBatCheck = time(0);
-            if(roundedBatPercentage < 2)
-            {
-                system("poweroff");
-            }
-            else if(roundedBatPercentage < 5)
-            {
-                sprintf(iconFilePath, "%s%s-%s%s", filePath, iconName, "alert", extension);
-            }
-            else if(roundedBatPercentage < 95) 
-            {
-                int tenthRoundedBatPercentage = roundedBatPercentage - (roundedBatPercentage%10);
-                sprintf(iconFilePath, "%s%s-%d%s", filePath, iconName, tenthRoundedBatPercentage, extension);
-            }
-            else 
-            {
-                sprintf(iconFilePath, "%s%s%s", filePath, iconName, extension);
-            }
+            sprintf(iconFilePath, "%s%s-%s%s", filePath, iconName, "alert", extension);
         }
-        else
+        else if(roundedBatPercentage < 95) 
         {
-            strcpy(iconFilePath, lastShownImage);
+            int tenthRoundedBatPercentage = roundedBatPercentage - (roundedBatPercentage%10);
+            sprintf(iconFilePath, "%s%s-%d%s", filePath, iconName, tenthRoundedBatPercentage, extension);
+        }
+        else 
+        {
+            sprintf(iconFilePath, "%s%s%s", filePath, iconName, extension);
         }
 
-        printf("%s\n", iconFilePath);
-        if(strcmp(lastShownImage, iconFilePath) != 0)
+        if(debug)
         {
-            strcpy(lastShownImage, iconFilePath);
-            system("killall -9 pngview");
-
-            char buf[100];
-            sprintf(buf, "%s %s &", "pngview -b 0x0000 -d 0 -l 15000 -y 5 -x 775", iconFilePath);
-            system(buf);     
+            printf("Max Voltage Bat: %.6f\n", maxVoltageBat);
+            printf("Min Voltage Bat: %.6f\n", minVoltageBat);
+            printf("Correction Factor: %.6f\n", correctionFactor);
+            printf("Bat Relative Read: %.6f\n", batRelativeRead);
+            printf("Bat Corrected Read: %.6f\n", batCorrectedRead);
+            printf("Effective Range Start: %.6f\n", effectiveRangeStart);
+            printf("Effective Range: %.6f\n", effectiveRange);
+            printf("Bat Level Effective: %.6f\n", batLevelEffective);
+            printf("Bat Percentage: %.6f\n", batPercentage);
         }
-    }    
+    }
+        
+    if(strcmp(lastShownImage, iconFilePath) != 0)
+    {
+        if(debug)
+        {            
+            printf("%s\n", iconFilePath);
+        }
+        
+        strcpy(lastShownImage, iconFilePath);
+        system("killall -9 pngview");
+
+        char buf[100];
+        sprintf(buf, "%s %s &", "pngview -b 0x0000 -d 0 -l 15000 -y 5 -x 775", iconFilePath);
+        system(buf);     
+    }   
 }
 
 /* 
