@@ -6,6 +6,8 @@
 This repository contains everything to rebuild the *simplyRetro - Z5*.
 The *Z5* is my first attempt to build a custom emulation handheld from scratch.
 
+![silpyRetro Z5](https://raw.githubusercontent.com/geaz/simplyRetro-Z5/master/images/cover.jpg)
+
 ## Warning
 This is my first self desinged retro handheld. So please be aware that it could contain some flaws.
 
@@ -81,6 +83,6 @@ Please be aware, that the default config.txt will rotate the screen. This is nec
 
 ## Credits
 Thanks to [NeoHorizon](https://github.com/NeonHorizon/lipopi) and [Craic](https://github.com/craic/pi_power) for the work on the power circuits. I took their work and reworked the circuit a bit and created a custom battery monitor in C.  
-Thanks to [BuildRoot](https://buildroot.org/) for the creation make system which enabled me to create a custom linux distribution.  
+Thanks to [BuildRoot](https://buildroot.org/) for the creation of this great system which enabled me to create a custom linux distribution.  
 Thanks to [RecalBox](https://www.recalbox.com/) for their work on the packages for BuildRoot. I took the RetroArch and LibRetro packages and reworked them a bit to work on my distribution.  
 Thanks to [ehettervik](https://retropie.org.uk/forum/topic/4611/runcommand-system-splashscreens) for the emulator splashscreens.
