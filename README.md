@@ -44,15 +44,10 @@ The model was designed in Fusion360. If you want to change the design, you can f
 
 ## Build
 
-- Shell
-- Power
-- Audio
-- Battery
-
-http://diy-fever.com/software/diylc/
+Will follow ...
 
 ## Custom Distribution
-The custom distribution can be downloaded [here](https://github.com/geaz/simplyRetro-Z5/releases).
+The custom distribution can be downloaded [here](https://github.com/geaz/simplyRetro-Z5/releases).  
 It is based on [BuildRoot](https://buildroot.org/) and just contains the packages needed to play on the *Z5*. The *Z5* uses Retroarch for all emulations. The following systems are supported at the moment (more can be added):
 
 - Arcade (MAME2013-plus)
