@@ -18,13 +18,13 @@
 #define DIVIDER_R2 10000.0
 
 #define BAT_MIN 3.4
-#define BAT_MAX 4.2
+#define BAT_MAX 4.05
 #define GPIO_MAX 3.3
 
 time_t shutdownPressedOn = 0;
 time_t lastBatCheck = 0;
 
-int checkIntervalInSec = 5;
+int checkIntervalInSec = 3;
 int checkBatIntervalInSec = 10;
 
 char lastShownImage[50];
@@ -110,11 +110,11 @@ void checkBat()
          
         int roundedBatPercentage = round(batPercentage*100);
 
-        if(roundedBatPercentage < 2)
+        if(batPercentage < 3)
         {
             system("poweroff");
         }
-        else if(roundedBatPercentage < 10)
+        else if(batPercentage < 10)
         {
             sprintf(iconFilePath, "%s%s-%s%s", filePath, iconName, "alert", extension);
         }

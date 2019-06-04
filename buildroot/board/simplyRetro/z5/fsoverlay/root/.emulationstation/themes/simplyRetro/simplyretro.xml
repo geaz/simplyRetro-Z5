@@ -4,7 +4,7 @@
 	<formatVersion>4</formatVersion>
 	<view name="system, basic, detailed, grid, video">	
 		<image name="background">
-			<color>000000</color>
+			<color>EEEEEE</color>
 			<path>./_inc/img/bg_color.png</path>
 			<size>1 1</size>
 			<pos>0 0</pos>
@@ -13,10 +13,10 @@
 
 	<view name="system">		
 		<text name="systemInfo">
-			<fontPath>./_inc/font/OpenSans-Regular.ttf</fontPath>
+			<fontPath>./_inc/font/RobotoCondensed-Regular.ttf</fontPath>
 			<fontSize>0.05</fontSize>
-			<backgroundColor>00000000</backgroundColor>
-			<color>FFFFFF</color>
+			<backgroundColor>FFFFFF00</backgroundColor>
+			<color>000000</color>
 			<alignment>center</alignment>
 			<pos>0 0.25</pos>
 			<size>1 1</size>
@@ -25,7 +25,7 @@
 		<carousel name="systemcarousel">
 			<pos>0 0</pos>
 			<size>1 1</size>
-			<color>00000000</color>
+			<color>EEEEEE</color>
 			<maxLogoCount>1</maxLogoCount>
 			<logoSize>0.5 0.5</logoSize>
 		</carousel>
@@ -39,14 +39,14 @@
 		</image>
 
 		<textlist name="gamelist">
-			<selectorColor>FFFFFF33</selectorColor>
-			<selectedColor>FFFFFF</selectedColor>
-			<primaryColor>FFFFFF55</primaryColor>
-			<secondaryColor>888888</secondaryColor>
-			<fontPath>./_inc/font/OpenSans-Regular.ttf</fontPath>
+			<selectorColor>00000033</selectorColor>
+			<selectedColor>000000</selectedColor>
+			<primaryColor>00000055</primaryColor>
+			<secondaryColor>00000055</secondaryColor>
+			<fontPath>./_inc/font/RobotoCondensed-Regular.ttf</fontPath>
 			<fontSize >0.05</fontSize >
-			<size>1 0.72y</size>
-			<pos>0 0.24</pos>
+			<size>1 0.69</size>
+			<pos>0 0.25</pos>
 		</textlist>
 	</view>
 </theme>
