@@ -13,7 +13,7 @@ This is my first self desinged retro handheld. So please be aware that it could 
 
 ## Features
 - Custom 3D printed shell
-- Custom linux distribution for fast boot (from button press to emulationstation in 10 seconds)
+- Custom linux distribution for fast boot ([from button press to emulationstation in 10 seconds](https://imgur.com/a/TFRGUFs))
 - Single press power on and long press power off
 - Battery Monitor icon and safe shutdown
 - Stereo Speakers, Audio Jack and Volume Control
