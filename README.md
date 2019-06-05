@@ -24,7 +24,7 @@ This is my first self desinged retro handheld. So please be aware that it could 
 The Pi Zero and the 5 inch display are the reason for the naming *Z5*.
 
 ## 3D Model
-The model was designed in Fusion360. If you want to change the design, you can find the whole model [here](https://a360.co/2GZACGc). The STLs are in the Thingiverse downloads and the Github repository.
+The model was designed in Fusion360. If you want to change the design, you can find the whole model [here](https://a360.co/2GZACGc). The STLs are in the Thingiverse downloads and the Github repository. Furthermore there are exported STEP and Fusion360 Archive Files ready to download.
 
 ## BOM
 - 3D Printed Shell (STL folder for models)
