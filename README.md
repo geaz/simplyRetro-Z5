@@ -50,7 +50,7 @@ The model was designed in Fusion360. If you want to change the design, you can f
 I hope you got all you parts. Now it is time to assemble the Z5. Again, please be aware, that you should have basic soldering skills and you should be able to understand basic circuits.
 
 ### Buttons
-This part is easy. Take all your printed button mounts and insert the *Adafruit SoftButtons* into them. It should be a tight fit. Use a pliers, if necessary and bend on of the four button pins to prevent it to fell out from the mount. Insert the printed DPad and buttons into the upper shell and screw the populated button mounts on top. **On the DPad please leave the upper right screw and on the button mount the upper left screw. These holes will be used to fasten the bottom half of the shell.**
+This part is easy. Take all your printed button mounts and insert the *Adafruit SoftButtons* into them. It should be a tight fit. Use a pliers, if necessary and bend on of the four button pins to prevent it to fell out from the mount. Insert the printed DPad and buttons into the upper shell and screw the populated button mounts on top. **On the DPad please leave the upper right screw and on the button mount the upper left screw. These holes will be used to fasten the bottom half of the shell.** The *Shoulder Buttons* and *Shoulder Button Mounts* will be inserted into the shell before it gets closed. 
 
 ![simplyRetro Z5 - Buttons](https://raw.githubusercontent.com/geaz/simplyRetro-Z5/master/images/1.jpg)
 
@@ -77,6 +77,18 @@ Now take the printed spacers and two M3x8mm screws and attach the mount to the d
 ![simplyRetro Z5 - Electronic Mount Spacers](https://raw.githubusercontent.com/geaz/simplyRetro-Z5/master/images/6.jpg)
 
 ![simplyRetro Z5 - Electronic Mount assembled](https://raw.githubusercontent.com/geaz/simplyRetro-Z5/master/images/7.jpg)
+
+### Power
+....
+
+### Audio
+....
+
+### Battery Monitor
+....
+
+### Closing the shell
+....
 
 ## Custom Distribution
 The custom distribution can be downloaded [here](https://github.com/geaz/simplyRetro-Z5/releases).  
