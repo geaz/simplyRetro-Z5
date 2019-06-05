@@ -42,7 +42,7 @@ The model was designed in Fusion360. If you want to change the design, you can f
 - [1x Jack Plug PJ-307](https://de.aliexpress.com/item/Hot-10-Pcs-5-Pin-3-5mm-Weibliche-Audio-Stereo-Jack-Buchse-PJ-307-PJ307-3F07/32955627960.html?spm=a2g0x.search0104.3.47.2f06a574KeRuaT&transAbTest=ae803_3&ws_ab_test=searchweb0_0%2Csearchweb201602_3_10065_10068_10547_319_317_10548_10696_10084_453_10083_454_10618_10304_10307_10820_10821_537_10302_536_10843_10059_10884_10887_321_322_10103%2Csearchweb201603_53%2CppcSwitch_0&algo_pvid=bd63449e-32af-4e5b-b0f5-bb676c2d5100&algo_expid=bd63449e-32af-4e5b-b0f5-bb676c2d5100-6)
 - 1x PAM8403 (Audio AMP)
 - 1x 2500 mAh LiPo ([like this one](https://www.ebay.de/itm/LiPo-Akku-Lithium-Ion-Polymer-Batterie-3-7V-2500mAh-JST-PH-Connector-ZB07008/283213408497?ssPageName=STRK%3AMEBIDX%3AIT&_trksid=p2057872.m2749.l2649))
-- Veroboard / Stripboard (if you want to use the same circuits as me for the battery monitoring and safe shutdown)
+- [Stripboard](https://www.amazon.com/ST3U-StripBoard-3U-Uncut-Strips-Sided/dp/B00C9NXP94/ref=sr_1_1?__mk_de_DE=%C3%85M%C3%85%C5%BD%C3%95%C3%91&keywords=stripboard&qid=1559770029&s=gateway&sr=8-1) (if you want to use the same circuits as me for the battery monitoring and safe shutdown)
 - Some M3x8mm screws (Mounts and Shell), M2.5x4mm screws (Electronics) and one M2.5x8mm screw (Top screw on the bottom shell, has to be smaller to get it fit)
 
 ## Build
