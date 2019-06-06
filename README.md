@@ -11,7 +11,7 @@ I maintained a really small [build log](https://www.3dgeeks.club/d/32-simplyretr
 ![simplyRetro Z5](https://raw.githubusercontent.com/geaz/simplyRetro-Z5/master/images/cover.jpg)
 
 ## Warning
-This is my first self desinged retro handheld. So please be aware that it could contain some flaws. Furthermore you should be able to handle a soldering iron and you have to understand basic circuits, if you want to rebuild the Z5. Please make sure that you understand the steps in the build section, before you decide to rebuild the handheld.
+This is my first self designed retro handheld. So please be aware that it could contain some flaws. Furthermore you should be able to handle a soldering iron and you have to understand basic circuits, if you want to rebuild the Z5. Please make sure that you understand the steps in the build section, before you decide to rebuild the handheld.
 
 ## Features
 - Custom 3D printed shell
