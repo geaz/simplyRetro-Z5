@@ -49,7 +49,7 @@ The model was designed in Fusion360. If you want to change the design, you can f
 ## Build
 This chapter should help you to build the Z5. If you are missing something, or think it could be phrased better, you are free to create a *Pull Request* on Github. This way, together we can create a guide which is easy to understand! I will always keep the description on Thingiverse in sync to the *Readme* on Github.
 
-Again, please be aware, that you should have basic soldering skills and you should be able to understand basic circuits.
+**Again, please be aware, that you should have basic soldering skills and you should be able to understand basic circuits. Make sure that you understand the steps in the build section, before you decide to rebuild the handheld.**
 
 I hope you got all you parts. Now it is time to assemble the Z5. 
 
@@ -85,7 +85,7 @@ Now take the printed spacers and two M3x8mm screws and attach the mount to the d
 ![simplyRetro Z5 - Electronic Mount assembled](https://raw.githubusercontent.com/geaz/simplyRetro-Z5/master/images/7.jpg)
 
 ### Power
-To power the Raspberry Pi Zero through the Powerboost 1000c I soldered ther PowerBoost to the usb test pads of the Raspberry Pi.  
+To power the Raspberry Pi Zero through the Powerboost 1000C, I soldered the PowerBoost to the USB test pads of the Raspberry Pi. 
 I used the same pads to solder a short Micro USB cable (I used the one which came with the display) to power the display. Unfortunately I don't have a picture of this.
 Just search for the pinout of a micro USB adapter. You just need the *Vcc* and *GND*. If you are not sure which cable is which on your adapter, try to measure it with a multimeter.
 
