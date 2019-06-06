@@ -24,17 +24,21 @@
 time_t shutdownPressedOn = 0;
 time_t lastBatCheck = 0;
 
-int checkIntervalInSec = 3;
+int shutdownPin = -1;
+int shutdownPressDurationInSec = 3;
+int checkIntervalInSec = 1;
 int checkBatIntervalInSec = 10;
 
 char lastShownImage[50];
 bool debug = false;
 
+char configFile[] = "/boot/retropower.cfg";
 char iconName[] = "battery";
 char filePath[] = "/root/.retropower/";
 char extension[] = ".png";
 char iconFilePath[50];
 
+void readShutdownPinFromConfig();
 void checkDebug(int argc, char *argv[]);
 void checkPowerOff();
 void checkBat();
@@ -44,15 +48,37 @@ int analogPowerRead(int adcnum);
 int main(int argc, char *argv[]) 
 {
     checkDebug(argc, argv);    
-    wiringPiSetup();
-    wiringPiSPISetup(0, 4*1000*1000);
-    pinMode(24, INPUT); // WiringPi24 = GPIO 19 - The PowerOff Pin
-
-    while(1) 
+    if(access(configFile, F_OK) != -1)
     {
-        checkPowerOff();
-        checkBat();
-        sleep(checkIntervalInSec);
+        readShutdownPinFromConfig();
+        if(shutdownPin != -1) 
+        {            
+            wiringPiSetup();
+            wiringPiSPISetup(0, 4*1000*1000);
+            pinMode(shutdownPin, INPUT);
+
+            while(1) 
+            {
+                checkPowerOff();
+                checkBat();
+                sleep(checkIntervalInSec);
+            }
+        }        
+    } 
+}
+
+void readShutdownPinFromConfig()
+{
+    FILE *file = fopen(configFile, "r");
+    while(!feof(file)) 
+    {
+        fscanf(file, "%d", &shutdownPin);
+    }	
+    fclose(file);
+
+    if(debug)
+    {
+        printf("ShutDown Pin: %d\n", shutdownPin);
     }
 }
 
@@ -66,15 +92,15 @@ void checkDebug(int argc, char *argv[])
 
 void checkPowerOff()
 {
-    if(shutdownPressedOn == 0 && digitalRead(24) == 1)
+    if(shutdownPressedOn == 0 && digitalRead(shutdownPin) == 1)
     {
         shutdownPressedOn = time(0);
     }
-    else if(shutdownPressedOn != 0 && digitalRead(24) == 1)
+    else if(shutdownPressedOn != 0 && time(0) >= shutdownPressedOn + shutdownPressDurationInSec && digitalRead(shutdownPin) == 1)
     {
-        system("poweroff");
+        system("halt");
     }
-    else
+    else if(shutdownPressedOn != 0 && digitalRead(shutdownPin) == 0)
     {
         shutdownPressedOn = 0;
     }
@@ -110,11 +136,11 @@ void checkBat()
          
         int roundedBatPercentage = round(batPercentage*100);
 
-        if(batPercentage < 3)
+        if(batPercentage < 0.03)
         {
-            system("poweroff");
+            system("halt");
         }
-        else if(batPercentage < 10)
+        else if(batPercentage < 0.1)
         {
             sprintf(iconFilePath, "%s%s-%s%s", filePath, iconName, "alert", extension);
         }
@@ -158,16 +184,6 @@ void checkBat()
     }   
 }
 
-/* 
-Calculate the output of a voltage divider
-voltage_divider layout is:
-Vin ---[ R1 ]---[ R2 ]---GND
-              |
-            Vout
-
-Vout = R2 / (R1 + R2) * Vin
- e.g. if R1 = 6800 and R2 = 10000 and Vin is 5.2V then Vout is 3.095 
- */
 float voltageDivider(float r1, float r2, float vin) 
 {
     return vin * (r2 / (r1 + r2));
