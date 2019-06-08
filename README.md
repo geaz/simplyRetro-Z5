@@ -36,6 +36,7 @@ The model was designed in Fusion360. If you want to change the design, you can f
 - [1x Powerboost 1000c](https://www.adafruit.com/product/2465)
 - [2x Speaker](https://www.reichelt.de/kleinlautsprecher-k-34-wp-1w-8ohm-vis-2981-p204642.html?&trstct=pos_0) (or similar, just make sure they are 1W, 8Ohm and have a diameter of 3.4 cm)
 - Resistors (6,8K, 10K, 100K)
+- 1N4001 Diodes
 - [FPV HDMI Adapter](https://de.aliexpress.com/item/FPV-Micro-HDMI-Mini-HDMI-90-grad-Adapter-5-cm-100-cm-FPC-Band-Flache-Hdmi/32833580742.html?spm=a2g0x.search0104.3.1.562f67acdeKi5D&transAbTest=ae803_3&ws_ab_test=searchweb0_0%2Csearchweb201602_3_10065_10068_10547_319_317_10548_10696_10084_453_10083_454_10618_10304_10307_10820_10821_537_10302_536_10843_10059_10884_10887_321_322_10103%2Csearchweb201603_53%2CppcSwitch_0&algo_pvid=6dcfe960-6b93-4bfb-8be8-ffbdc195707f&algo_expid=6dcfe960-6b93-4bfb-8be8-ffbdc195707f-0) (1xA1, 1xC1 and 1x5cm Cable)
 - 1x MCP3008 ADC
 - 1x Volume potentiometer (I took a GameBoy Color replacement part)
@@ -91,6 +92,18 @@ Just search for the pinout of a micro USB adapter. You just need the *Vcc* and *
 
 ![simplyRetro Z5 - Test Pads](https://raw.githubusercontent.com/geaz/simplyRetro-Z5/master/images/Power-2.jpg)
 ![simplyRetro Z5 - PowerBoost Soldered](https://raw.githubusercontent.com/geaz/simplyRetro-Z5/master/images/Power-1.jpg)
+
+Now you need to do your first little circuit for this project. The circuit to power the Pi on and off.
+You will need a piece of the Stripboard, the single tactile switch, three diodes, 1x100k and 2x10k resistors. 
+Before you start soldering, you should do the needed cuts on the Stripboard. 
+
+Because the audio circuit and the battery monitor also needs a ground line, I cutted an additional piece of Stripboard
+of 1x5 in size and used this as my ground line.
+
+Please use the following pictures as a reference. 
+
+![simplyRetro Z5 - Power Circuit](https://raw.githubusercontent.com/geaz/simplyRetro-Z5/master/images/c2.jpg)
+![simplyRetro Z5 - Ground](https://raw.githubusercontent.com/geaz/simplyRetro-Z5/master/images/ground.jpg)
 
 ### Audio
 ....
