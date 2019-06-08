@@ -97,11 +97,18 @@ Now you need to do your first little circuit for this project. The circuit to po
 You will need a piece of the Stripboard, the single tactile switch, three diodes, 1x100k and 2x10k resistors. 
 Before you start soldering, you should do the needed cuts on the Stripboard. 
 
+![simplyRetro Z5 - Power Circuit](https://raw.githubusercontent.com/geaz/simplyRetro-Z5/master/images/c2.png)
+
+The circuit needs a bit of explanation. If the switch is not pressed, the *Enable* pin of the *PowerBoost* gets pulled to ground. This way the *PowerBoost* will be disabled when a battery is connected. As soon as the switch gets pressed, the *Battery* pin of the *PowerBoost* gets connected to the *Enabled* pin. This will enable the *PowerBoost*. Because we connected GPIO 7 of the Pi to the board the *Enable* pin will stay *HIGH* when the switch gets released and the board will stay powered on. You are able to use another pin than GPIO 7, but you have to make sure that you use a pin which is *HIGH* per default. 
+
+GPIO 19 is used as the power off pin. The *simplyRetro Z5* custom distribution contains a small tool which listens to GPIO 19. If this pin gets *HIGH* and stays *HIGH* for a small amount of time a shutdown of the Pi gets initiated. Because of the line
+
+*dtoverlay=gpio-poweroff,gpiopin=7,active_low=1*
+
+in the config.txt, GPIO 7 will go *LOW*, if the Pi is shutdown. This disables the *PowerBoost* again.
+
 Because the audio circuit and the battery monitor also needs a ground line, I cutted an additional piece of Stripboard of 1x5 in size and used this as my ground line.
 
-Please use the following pictures as a reference. 
-
-![simplyRetro Z5 - Power Circuit](https://raw.githubusercontent.com/geaz/simplyRetro-Z5/master/images/c2.png)
 ![simplyRetro Z5 - Ground](https://raw.githubusercontent.com/geaz/simplyRetro-Z5/master/images/ground.jpg)
 
 ### Audio
