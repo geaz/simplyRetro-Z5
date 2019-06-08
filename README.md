@@ -97,12 +97,11 @@ Now you need to do your first little circuit for this project. The circuit to po
 You will need a piece of the Stripboard, the single tactile switch, three diodes, 1x100k and 2x10k resistors. 
 Before you start soldering, you should do the needed cuts on the Stripboard. 
 
-Because the audio circuit and the battery monitor also needs a ground line, I cutted an additional piece of Stripboard
-of 1x5 in size and used this as my ground line.
+Because the audio circuit and the battery monitor also needs a ground line, I cutted an additional piece of Stripboard of 1x5 in size and used this as my ground line.
 
 Please use the following pictures as a reference. 
 
-![simplyRetro Z5 - Power Circuit](https://raw.githubusercontent.com/geaz/simplyRetro-Z5/master/images/c2.jpg)
+![simplyRetro Z5 - Power Circuit](https://raw.githubusercontent.com/geaz/simplyRetro-Z5/master/images/c2.png)
 ![simplyRetro Z5 - Ground](https://raw.githubusercontent.com/geaz/simplyRetro-Z5/master/images/ground.jpg)
 
 ### Audio
