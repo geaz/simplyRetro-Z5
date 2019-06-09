@@ -35,8 +35,6 @@ The model was designed in Fusion360. If you want to change the design, you can f
 - 1x 5mm Tactile Button for the Power Button
 - [1x Powerboost 1000c](https://www.adafruit.com/product/2465)
 - [2x Speaker](https://www.reichelt.de/kleinlautsprecher-k-34-wp-1w-8ohm-vis-2981-p204642.html?&trstct=pos_0) (or similar, just make sure they are 1W, 8Ohm and have a diameter of 3.4 cm)
-- Resistors (6,8K, 10K, 100K)
-- 1N4001 Diodes
 - [FPV HDMI Adapter](https://de.aliexpress.com/item/FPV-Micro-HDMI-Mini-HDMI-90-grad-Adapter-5-cm-100-cm-FPC-Band-Flache-Hdmi/32833580742.html?spm=a2g0x.search0104.3.1.562f67acdeKi5D&transAbTest=ae803_3&ws_ab_test=searchweb0_0%2Csearchweb201602_3_10065_10068_10547_319_317_10548_10696_10084_453_10083_454_10618_10304_10307_10820_10821_537_10302_536_10843_10059_10884_10887_321_322_10103%2Csearchweb201603_53%2CppcSwitch_0&algo_pvid=6dcfe960-6b93-4bfb-8be8-ffbdc195707f&algo_expid=6dcfe960-6b93-4bfb-8be8-ffbdc195707f-0) (1xA1, 1xC1 and 1x5cm Cable)
 - 1x MCP3008 ADC
 - 1x Volume potentiometer (I took a GameBoy Color replacement part)
@@ -45,6 +43,9 @@ The model was designed in Fusion360. If you want to change the design, you can f
 - 1x 2500 mAh LiPo ([like this one](https://www.ebay.de/itm/LiPo-Akku-Lithium-Ion-Polymer-Batterie-3-7V-2500mAh-JST-PH-Connector-ZB07008/283213408497?ssPageName=STRK%3AMEBIDX%3AIT&_trksid=p2057872.m2749.l2649))
 - [Stripboard](https://www.amazon.com/ST3U-StripBoard-3U-Uncut-Strips-Sided/dp/B00C9NXP94/ref=sr_1_1?__mk_de_DE=%C3%85M%C3%85%C5%BD%C3%95%C3%91&keywords=stripboard&qid=1559770029&s=gateway&sr=8-1) (if you want to use the same circuits as me for the battery monitoring and safe shutdown)
 - Some M3x8mm screws (Mounts and Shell), M2.5x4mm screws (Electronics) and one M2.5x8mm screw (Top screw on the bottom shell, has to be smaller to get it fit)
+- Resistors (6,8K, 10K, 100K)
+- 1N4001 Diodes
+- Velcro or double-faced adhesive tape to attach the PAM and circuits
 - Wire :)
 
 ## Build
@@ -111,14 +112,43 @@ Because the audio circuit and the battery monitor also needs a ground line, I cu
 
 ![simplyRetro Z5 - Ground](https://raw.githubusercontent.com/geaz/simplyRetro-Z5/master/images/ground.jpg)
 
+### Controls
+Ths *simplyRetro Z5* uses *Adafruits Retrogame* for its controller inputs. 
+
+To make the softbuttons work, each button has to be connected to ground and one pin on the Raspberry Pi.
+I connected the ground pins on the DPad together and used just one ground pin on the Raspberry Pi for all four buttons.
+I did the same for the four buttons on the right and the *Start*, *Select* button. You could also use a piece of Stripboard to just use on
+ground pin of the Raspberry Pi and connect all ground wires of the buttons just to this Stripboard.
+
+If you want to use the exact same configuration for *Retrogame* you can use the following pins.
+
+```
+LEFT      16  # Joypad left
+RIGHT     17  # Joypad right
+DOWN      4   # Joypad down
+UP        2   # Joypad up
+Z         23  # 'B' button 
+X         24  # 'A' button 
+A         0   # 'Y' button 
+S         25  # 'X' button 
+Q         26  # Left shoulder button
+W         5   # Right shoulder button
+SPACE	  22  # 'Select' button
+ENTER     27  # 'Start' button
+```
+
 ### Audio
 ....
 
 ### Battery Monitor
-....
+For this step you will again need a bit of the Stripboard, the MCP3008, two 6.8k and two 10k resistors.
+Again make sure to do the cuts on the Stripboard, before you start soldering. Solder everyhing as referenced in the following picture.
+You should use the exactly same pins, if you want the battery monitor tool in the custom distribution to work.
+
+![simplyRetro Z5 - ADC Circuit](https://raw.githubusercontent.com/geaz/simplyRetro-Z5/master/images/c1.png)
 
 ### Closing the shell
-....
+As soon as your SD card is flashed and everything is working, you are able to close the shell. Use four M3x8mm and one M2.5x8mm. Be careful, that the screw holes are free from wires. You don't want to damage them when you screw the shell halves together. After this last step is done, go and enjoy your *simplyRetro Z5*! Have fun :)
 
 ## Custom Distribution
 The custom distribution can be downloaded [here](https://github.com/geaz/simplyRetro-Z5/releases).  
