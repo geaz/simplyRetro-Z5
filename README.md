@@ -181,7 +181,22 @@ The *Z5* uses Retroarch for all emulations. The following systems are supported 
 - SNES (snes9x2002)
 - Meda Drive / Master System / Sega CD (picodrive)
 
-If you want to use the distribution just use Etcher to copy the img file to a SD Card. The *boot* partition contains a *wpa_supplicant.conf* to configure the connection to your WLAN.
+If you want to use the distribution just use Etcher to copy the img file to a SD Card.
+
+### Boot Partition
+
+#### wpa_supplicant.conf
+Configure your WLAN connection here to be able to connect via FTP.
+
+#### config.txt
+Please be aware, that the default config.txt will rotate the screen. This is necessary, if you are you using the same screen as me.
+
+#### retrogame.cfg
+The Z5 uses RetroGame by Adafruit for the controller. In this file you are able to set the pins you used during the build.
+
+#### retropower.cfg
+If you used another GPIO than pin 19 for the power off button, you are able to set it in this file. Please be aware, that you have to use the WiringPi number of the GPIO pin.
+Use for example [https://de.pinout.xyz/](https://de.pinout.xyz/) to check the pin numbering. If you don't want to use the battery monitoring and power circuit, remove this file from the boot partition, to prevent the start of the power script.
 
 ### Login
 Start the system and login with:
@@ -198,17 +213,8 @@ To use the full size of you SD Card you should execute the following two scripts
 ### FTP
 If you configured the *wpa_supplicant.conf* on the boot partition, you are able to connect via FTP to copy your roms to the system. 
 
-### Boot Partition
-
-#### config.txt
-Please be aware, that the default config.txt will rotate the screen. This is necessary, if you are you using the same screen as me.
-
-#### retrogame.cfg
-The Z5 uses RetroGame by Adafruit for the controller. In this file you are able to set the pins you used during the build.
-
-#### retropower.cfg
-If you used another GPIO than pin 19 for the power off button, you are able to set it in this file. Please be aware, that you have to use the WiringPi number of the GPIO pin.
-Use for example [https://de.pinout.xyz/](https://de.pinout.xyz/) to check the pin numbering. If you don't want to use the battery monitoring and power circuit, remove this file from the boot partition, to prevent the start of the power script.
+### ROMs and BIOS folder
+The ROMs and BIOS folder are located at */root/roms* and */root/bios*. You are able to change the splash screen, if you want. It is also located at the */root* folder.
 
 ## Credits
 Thanks to [NeoHorizon](https://github.com/NeonHorizon/lipopi) and [Craic](https://github.com/craic/pi_power) for the work on the power circuits. I took their work and reworked the circuit a bit and created a custom battery monitor in C.  
