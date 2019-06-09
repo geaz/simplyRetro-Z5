@@ -154,9 +154,9 @@ After all your internals may look something likes this (or not so messy...).
 
 ![simplyRetro Z5 - Internals](https://raw.githubusercontent.com/geaz/simplyRetro-Z5/master/images/Internals.jpg)
 
-Please note, that in this picture the ADC is missing. I took it before the Battery Monitor was done.
+Please note, that in this picture the ADC is missing. I took the picture before the battery monitor was done.
 
-As soon as your SD card is flashed and everything is working, you are able to close the shell. Use four M3x8mm and one M2.5x8mm. Be careful, that the screw holes are free from wires. You don't want to damage them when you screw the shell halves together. After this last step is done, go and enjoy your *simplyRetro Z5*! Have fun :)
+As soon as your SD card is flashed and everything is working, you are able to close the shell. Use five M3x8mm and one M2.5x8mm. Be careful, that the screw holes are free from wires. You don't want to damage them when you screw the shell halves together. After this last step is done, go and enjoy your *simplyRetro Z5*! Have fun :)
 
 ## Custom Distribution
 The custom distribution can be downloaded [here](https://github.com/geaz/simplyRetro-Z5/releases).  
