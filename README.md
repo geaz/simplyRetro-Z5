@@ -143,13 +143,19 @@ ENTER     27  # 'Start' button
 ### Battery Monitor
 For this step you will again need a bit of the Stripboard, the MCP3008, two 6.8k and two 10k resistors.
 Again make sure to do the cuts on the Stripboard, before you start soldering. Solder everyhing as referenced in the following picture.
-You should use the exactly same pins, if you want the battery monitor tool in the custom distribution to work.
+You should use the exact same pins, if you want the battery monitor tool in the custom distribution to work.
 
 ![simplyRetro Z5 - ADC Circuit](https://raw.githubusercontent.com/geaz/simplyRetro-Z5/master/images/c1.png)
 
 I attached the board with Velcro on top of the right speaker.
 
 ### Closing the shell
+After all your internals may look something likes this (or not so messy...).
+
+![simplyRetro Z5 - Internals](https://raw.githubusercontent.com/geaz/simplyRetro-Z5/master/images/Internals.jpg)
+
+Please note, that in this picture the ADC is missing. I took it before the Battery Monitor was done.
+
 As soon as your SD card is flashed and everything is working, you are able to close the shell. Use four M3x8mm and one M2.5x8mm. Be careful, that the screw holes are free from wires. You don't want to damage them when you screw the shell halves together. After this last step is done, go and enjoy your *simplyRetro Z5*! Have fun :)
 
 ## Custom Distribution
