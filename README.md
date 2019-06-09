@@ -108,7 +108,11 @@ GPIO 19 is used as the power off pin. The *simplyRetro Z5* custom distribution c
 
 in the config.txt, GPIO 7 will go *LOW*, if the Pi is shutdown. This disables the *PowerBoost* again.
 
-Because the audio circuit and the battery monitor also needs a ground line, I cutted an additional piece of Stripboard of 1x5 in size and used this as my ground line.
+Attach the switch into the bottom of the top shell half. I took a little drop of super glue to fix it in place.
+
+![simplyRetro Z5 - Power Button](https://raw.githubusercontent.com/geaz/simplyRetro-Z5/master/images/PowerButton.jpg)
+
+Because the battery monitor and the controller also need several ground wires, I cutted an additional piece of Stripboard of 1x5 in size and used this as a single ground to the Pi.
 
 ![simplyRetro Z5 - Ground](https://raw.githubusercontent.com/geaz/simplyRetro-Z5/master/images/ground.jpg)
 
@@ -138,7 +142,14 @@ ENTER     27  # 'Start' button
 ```
 
 ### Audio
-....
+The *simyplRetro Z5* takes the audio source directly from the HDMI display. Use a piece of the Stripboard (1x4 in size) as the ground connection.
+**Don't connect the ground of the PAM! Otherwise you will create a ground loop which will cause interferences in you audio circuit!**
+
+![simplyRetro Z5 - Audio](https://raw.githubusercontent.com/geaz/simplyRetro-Z5/master/images/Audio.png)
+
+I attached the potentiometer with a little drop of hot glue. The audio jack plug should be press fit.
+
+![simplyRetro Z5 - Audio](https://raw.githubusercontent.com/geaz/simplyRetro-Z5/master/images/AudioControls.jpg)
 
 ### Battery Monitor
 For this step you will again need a bit of the Stripboard, the MCP3008, two 6.8k and two 10k resistors.
@@ -153,8 +164,6 @@ I attached the board with Velcro on top of the right speaker.
 After all your internals may look something likes this (or not so messy...).
 
 ![simplyRetro Z5 - Internals](https://raw.githubusercontent.com/geaz/simplyRetro-Z5/master/images/Internals.jpg)
-
-Please note, that in this picture the ADC is missing. I took the picture before the battery monitor was done.
 
 As soon as your SD card is flashed and everything is working, you are able to close the shell. Use five M3x8mm and one M2.5x8mm. Be careful, that the screw holes are free from wires. You don't want to damage them when you screw the shell halves together. After this last step is done, go and enjoy your *simplyRetro Z5*! Have fun :)
 
