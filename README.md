@@ -113,7 +113,7 @@ Because the audio circuit and the battery monitor also needs a ground line, I cu
 ![simplyRetro Z5 - Ground](https://raw.githubusercontent.com/geaz/simplyRetro-Z5/master/images/ground.jpg)
 
 ### Controls
-Ths *simplyRetro Z5* uses *Adafruits Retrogame* for its controller inputs. 
+The *simplyRetro Z5* uses *Adafruits Retrogame* for its controller inputs. 
 
 To make the softbuttons work, each button has to be connected to ground and one pin on the Raspberry Pi.
 I connected the ground pins on the DPad together and used just one ground pin on the Raspberry Pi for all four buttons.
@@ -146,6 +146,8 @@ Again make sure to do the cuts on the Stripboard, before you start soldering. So
 You should use the exactly same pins, if you want the battery monitor tool in the custom distribution to work.
 
 ![simplyRetro Z5 - ADC Circuit](https://raw.githubusercontent.com/geaz/simplyRetro-Z5/master/images/c1.png)
+
+I attached the board with Velcro on top of the right speaker.
 
 ### Closing the shell
 As soon as your SD card is flashed and everything is working, you are able to close the shell. Use four M3x8mm and one M2.5x8mm. Be careful, that the screw holes are free from wires. You don't want to damage them when you screw the shell halves together. After this last step is done, go and enjoy your *simplyRetro Z5*! Have fun :)
