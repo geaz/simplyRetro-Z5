@@ -161,7 +161,7 @@ You should use the exact same pins, if you want the battery monitor tool in the 
 I attached the board with Velcro on top of the right speaker.
 
 ### Closing the shell
-After all your internals may look something likes this (or not so messy...).
+Finally your internals may look something likes this (or not so messy...).
 
 ![simplyRetro Z5 - Internals](https://raw.githubusercontent.com/geaz/simplyRetro-Z5/master/images/Internals.jpg)
 
