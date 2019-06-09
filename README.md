@@ -216,6 +216,11 @@ If you configured the *wpa_supplicant.conf* on the boot partition, you are able 
 ### ROMs and BIOS folder
 The ROMs and BIOS folder are located at */root/roms* and */root/bios*. You are able to change the splash screen, if you want. It is also located at the */root* folder.
 
+### Controls
+EmulationStation will ask you to configure your controller on the first start.  
+Retro Arch is configured to exit a ROM, if you press *SELECT + B*.  
+You are able to open the Retro Arch menu while playing a game, if you press *SELECT + A*.
+
 ## Credits
 Thanks to [NeoHorizon](https://github.com/NeonHorizon/lipopi) and [Craic](https://github.com/craic/pi_power) for the work on the power circuits. I took their work and reworked the circuit a bit and created a custom battery monitor in C.  
 Thanks to [BuildRoot](https://buildroot.org/) for the creation of this great system which enabled me to create a custom linux distribution.  
