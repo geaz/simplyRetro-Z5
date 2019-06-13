@@ -218,8 +218,8 @@ The ROMs and BIOS folder are located at */root/roms* and */root/bios*. You are a
 
 ### Controls
 EmulationStation will ask you to configure your controller on the first start.  
-Retro Arch is configured to exit a ROM, if you press *SELECT + B*.  
-You are able to open the Retro Arch menu while playing a game, if you press *SELECT + A*.
+Retro Arch is configured to exit a ROM, if you press *START + B*.  
+You are able to open the Retro Arch menu while playing a game, if you press *START + A*.
 
 ### Updates
 If there will be an update to the distribution, I will try to distribute the updated files together with the image. This way you are able to update just these files via FTP and don't have to flash the whole image again.
