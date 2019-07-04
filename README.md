@@ -61,7 +61,7 @@ This part is easy. Take all your printed button mounts and insert the *Adafruit 
 ![simplyRetro Z5 - Buttons](https://raw.githubusercontent.com/geaz/simplyRetro-Z5/master/images/1.jpg)
 
 ### Display
-**The display will be assembled upside down**. Otherwise we will get space problems with the HDMI connectors. 
+**You have to install the display rotated by 180°**. Otherwise we will get space problems with the HDMI connectors. 
 
 To fit the display into the shell, you have to cut off half of the bottom display mounts. 
 Please use the following two pictures as a reference.  
