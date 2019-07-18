@@ -10,6 +10,8 @@ I maintained a really small [build log](https://www.3dgeeks.club/d/32-simplyretr
 
 ![simplyRetro Z5](https://raw.githubusercontent.com/geaz/simplyRetro-Z5/master/images/cover.jpg)
 
+You can find a small video of it in action on [Youtube](https://www.youtube.com/watch?v=HvgBQ3S0Ykw).
+
 ## Warning
 This is my first self designed retro handheld. So please be aware that it could contain some flaws. Furthermore you should be able to handle a soldering iron and you have to understand basic circuits, if you want to rebuild the Z5. Please make sure that you understand the steps in the build section, before you decide to rebuild the handheld.
 
@@ -175,11 +177,12 @@ It is based on [BuildRoot](https://buildroot.org/) and just contains the package
 
 The *Z5* uses Retroarch for all emulations. The following systems are supported at the moment (more can be added):
 
-- Arcade (MAME2013-plus)
+- Arcade (MAME2013-plus - BIOS needed)
 - Gameboy DMG / Color (Gambatte)
+- Gameboy Advance (gpsp - BIOS needed)
 - NES (quicknes)
 - SNES (snes9x2002)
-- Meda Drive / Master System / Sega CD (picodrive)
+- Meda Drive / Master System / Sega CD (picodrive - BIOS needed for Sega CD)
 
 If you want to use the distribution just use Etcher to copy the img file to a SD Card.
 
