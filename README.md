@@ -55,10 +55,10 @@ This chapter should help you to build the Z5. If you are missing something, or t
 
 **Again, please be aware, that you should have basic soldering skills and you should be able to understand basic circuits. Make sure that you understand the steps in the build section, before you decide to rebuild the handheld.**
 
-I hope you got all you parts. Now it is time to assemble the Z5. 
+I hope you got all your parts. Now it is time to assemble the Z5. 
 
 ### Buttons
-This part is easy. Take all your printed button mounts and insert the *Adafruit SoftButtons* into them. It should be a tight fit. Use a pliers, if necessary and bend on of the four button pins to prevent it to fell out from the mount. Insert the printed DPad and buttons into the upper shell and screw the populated button mounts on top. **On the DPad please leave the upper right screw and on the button mount the upper left screw. These holes will be used to fasten the bottom half of the shell.** The *Shoulder Buttons* and *Shoulder Button Mounts* will be inserted into the shell before it gets closed. 
+This part is easy. Take all your printed button mounts and insert the *Adafruit SoftButtons* into them. It should be a tight fit. Use a pliers, if necessary and bend one of the four button pins to prevent it to fell out from the mount. Insert the printed DPad and buttons into the upper shell and screw the populated button mounts on top. **On the DPad please don't insert the upper right screw, and on the button mount the upper left screw, yet. These holes will be used to fasten the bottom half of the shell.** The *Shoulder Buttons* and *Shoulder Button Mounts* will be inserted into the shell before it gets closed. 
 
 ![simplyRetro Z5 - Buttons](https://raw.githubusercontent.com/geaz/simplyRetro-Z5/master/images/1.jpg)
 
@@ -104,7 +104,9 @@ Before you start soldering, you should do the needed cuts on the Stripboard.
 
 The circuit needs a bit of explanation. If the switch is not pressed, the *Enable* pin of the *PowerBoost* gets pulled to ground. This way the *PowerBoost* will be disabled when a battery is connected. As soon as the switch gets pressed, the *Battery* pin of the *PowerBoost* gets connected to the *Enabled* pin. This will enable the *PowerBoost*. Because we connected GPIO 7 of the Pi to the board the *Enable* pin will stay *HIGH* when the switch gets released and the board will stay powered on. You are able to use another pin than GPIO 7, but you have to make sure that you use a pin which is *HIGH* per default. 
 
-GPIO 19 is used as the power off pin. The *simplyRetro Z5* custom distribution contains a small tool which listens to GPIO 19. If this pin gets *HIGH* and stays *HIGH* for a small amount of time a shutdown of the Pi gets initiated. Because of the line
+GPIO 19 is used as the power off pin. The *simplyRetro Z5* custom distribution contains a small tool which listens to GPIO 19. If this pin gets *HIGH* and stays *HIGH* for a small amount of time a shutdown of the Pi gets initiated. 
+
+Because of the line
 
 *dtoverlay=gpio-poweroff,gpiopin=7,active_low=1*
 
@@ -123,7 +125,7 @@ The *simplyRetro Z5* uses *Adafruits Retrogame* for its controller inputs.
 
 To make the softbuttons work, each button has to be connected to ground and one pin on the Raspberry Pi.
 I connected the ground pins on the DPad together and used just one ground pin on the Raspberry Pi for all four buttons.
-I did the same for the four buttons on the right and the *Start*, *Select* button. You could also use a piece of Stripboard to just use on
+I did the same for the four buttons on the right and the *Start*, *Select* button. You could also use a piece of Stripboard to just use one
 ground pin of the Raspberry Pi and connect all ground wires of the buttons just to this Stripboard.
 
 If you want to use the exact same configuration for *Retrogame* you can use the following pins.
