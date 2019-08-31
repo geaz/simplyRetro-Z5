@@ -31,6 +31,7 @@ The Pi Zero and the 5 inch display are the reason for the naming *Z5*.
 The model was designed in Fusion360. If you want to change the design, you can find the whole model [here](https://a360.co/2GZACGc). The STLs are in the Thingiverse downloads and the Github repository. Furthermore there are exported STEP and Fusion360 Archive Files ready to download.
 
 ## BOM
+
 - 3D Printed Shell (STL folder for models)
 - [Elecrow 5 inch Display](https://www.elecrow.com/5-inch-hdmi-800-x-480-capacitive-touch-lcd-display-for-raspberry-pi-pc-sony-ps4.html) (If you want to use another display, make sure to adapt the shell) 
 - [12x Adafruit Softbuttons](https://www.adafruit.com/product/3101)
@@ -49,6 +50,10 @@ The model was designed in Fusion360. If you want to change the design, you can f
 - 1N4001 Diodes
 - Velcro or double-faced adhesive tape to attach the PAM and circuits
 - Wire :)
+
+### Alternative BOMs
+
+Thanks to [AxelNobody](https://www.thingiverse.com/AxelNobody/about)! He created a [alternative BOM](https://github.com/geaz/simplyRetro-Z5/blob/master/BOM%20-%20US.md) with shop links for US citizens.
 
 ## Build
 This chapter should help you to build the Z5. If you are missing something, or think it could be phrased better, you are free to create a *Pull Request* on Github. This way, together we can create a guide which is easy to understand! I will always keep the description on Thingiverse in sync to the *Readme* on Github.
