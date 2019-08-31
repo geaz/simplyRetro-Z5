@@ -4,7 +4,7 @@
 #
 ################################################################################
 
-RETROPOWER_VERSION = 399143ae66b80612e45bb7ef7f70f76c8e3da1f8
+RETROPOWER_VERSION = 7bda933af2956f6e08b172a6a8e2ea882869fc3b
 RETROPOWER_SITE = git://github.com/geaz/simplyRetro-z5
 RETROPOWER_SITE_METHOD = git
 RETROPOWER_DEPENDENCIES = wiringpi
