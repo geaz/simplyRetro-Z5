@@ -206,7 +206,7 @@ The Z5 uses RetroGame by Adafruit for the controller. In this file you are able 
 
 #### retropower.cfg
 If you used another GPIO than pin 19 for the power off button, you are able to set it in this file. Please be aware, that you have to use the WiringPi number of the GPIO pin.
-Use for example [https://de.pinout.xyz/](https://de.pinout.xyz/) to check the pin numbering. If you don't want to use the battery monitoring and power circuit, remove this file from the boot partition, to prevent the start of the power script.
+Use for example [https://de.pinout.xyz/](https://de.pinout.xyz/) to check the pin numbering. If you don't want to use the battery monitoring and/or power circuit, you are able to change the active features in this file.
 
 ### Login
 Start the system and login with:

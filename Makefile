@@ -4,8 +4,8 @@ CC     = gcc $(CFLAGS)
 
 all: $(EXECS)
 
-retropower: retroPower/main.c
-	$(CC) $< $(LIBS) -o $@
+retropower:
+	$(CC) retroPower/libs/ini.c retroPower/checkBat.c retroPower/debugLogger.c retroPower/powerConfig.c retroPower/powerOff.c retroPower/main.c $(LIBS) -o $@
 
 install:
 	mv $(EXECS) $(DESTDIR)/usr/bin
