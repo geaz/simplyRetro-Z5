@@ -1,0 +1,643 @@
+diff --git a/es-app/src/guis/GuiMenu.cpp b/es-app/src/guis/GuiMenu.cpp
+index b99ea8e..2d9b001 100644
+--- a/es-app/src/guis/GuiMenu.cpp
++++ b/es-app/src/guis/GuiMenu.cpp
+@@ -2,24 +2,27 @@
+ 
+ #include "components/OptionListComponent.h"
+ #include "components/SliderComponent.h"
+-#include "components/SwitchComponent.h"
+ #include "guis/GuiCollectionSystemsOptions.h"
+ #include "guis/GuiDetectDevice.h"
+ #include "guis/GuiGeneralScreensaverOptions.h"
+ #include "guis/GuiMsgBox.h"
+ #include "guis/GuiScraperStart.h"
+-#include "guis/GuiSettings.h"
++#include "guis/GuiTextEditPopupKeyboard.h"
+ #include "views/ViewController.h"
+ #include "CollectionSystemManager.h"
+ #include "EmulationStation.h"
+ #include "SystemData.h"
+ #include "VolumeControl.h"
+ #include <SDL_events.h>
++#include <fstream> 
+ 
+ GuiMenu::GuiMenu(Window* window) : GuiComponent(window), mMenu(window, "MAIN MENU"), mVersion(window)
+ {
+ 	bool isFullUI = ViewController::get()->isUIModeFull();
+ 
++	if(isFullUI)
++		addEntry("SIMPLYRETRO", 0x777777FF, true, [this] { openSimplyRetroSettings(); });
++
+ 	if (isFullUI)
+ 		addEntry("SCRAPER", 0x777777FF, true, [this] { openScraperSettings(); });
+ 
+@@ -47,6 +50,63 @@ GuiMenu::GuiMenu(Window* window) : GuiComponent(window), mMenu(window, "MAIN MEN
+ 	setPosition((Renderer::getScreenWidth() - mSize.x()) / 2, Renderer::getScreenHeight() * 0.15f);
+ }
+ 
++void GuiMenu::openSimplyRetroSettings()
++{
++	auto s = new GuiSettings(mWindow, "SIMPLYRETRO");
++
++	// WiFi Setting
++	auto wifi_enabled = std::make_shared<SwitchComponent>(mWindow);
++	addServiceSwitch(s, wifi_enabled, "WiFi", "EnableWiFi", "S40network");
++
++	// FTP Setting
++	auto ftp_enabled = std::make_shared<SwitchComponent>(mWindow);
++	addServiceSwitch(s, ftp_enabled, "FTP", "EnableFTP", "S70vsftpd");
++
++	// SSH Setting
++	auto ssh_enabled = std::make_shared<SwitchComponent>(mWindow);
++	addServiceSwitch(s, ssh_enabled, "SSH", "EnableSSH", "S50dropbear");
++
++	// WiFi SSID
++	auto wifi_ssid = std::make_shared<TextComponent>(mWindow, "", Font::get(FONT_SIZE_SMALL), 0x777777FF);
++	addEditableTextComponent(s, "WIFI SSID", wifi_ssid, Settings::getInstance()->getString("WiFiSSID"));
++
++	// WiFi PSK
++	auto wifi_psk = std::make_shared<TextComponent>(mWindow, "", Font::get(FONT_SIZE_SMALL), 0x777777FF);
++	addEditableTextComponent(s, "WIFI PSK", wifi_psk, Settings::getInstance()->getString("WiFiPSK"));
++
++	s->addSaveFunc([wifi_ssid, wifi_psk] {
++		auto oldSsid = Settings::getInstance()->getString("WiFiSSID");
++		auto oldPsk = Settings::getInstance()->getString("WiFiPSK");
++		
++		auto ssid = wifi_ssid->getValue();
++		auto psk = wifi_psk->getValue();
++		
++		if(oldSsid != ssid || oldPsk != psk)
++		{
++			// Save new wpa_supplicant
++			remove("/root/wpa_supplicant.conf");
++			std::string newFileContent = "network={\n\tssid=\"" + ssid + "\"\n\tpsk=\"" + psk + "\"\n}";
++
++			std::ofstream wpaFile;
++			wpaFile.open("/root/wpa_supplicant.conf");
++			wpaFile << newFileContent;
++			wpaFile.close();
++
++			Settings::getInstance()->setString("WiFiSSID", ssid);
++			Settings::getInstance()->setString("WiFiPSK", psk);
++
++			// restart network on file change
++			if(Settings::getInstance()->getBool("EnableWiFi"))
++			{
++				system("sh /etc/init.d/S40network stop");
++				system("sh /etc/init.d/S40network start");
++			}
++		}
++	});
++
++	mWindow->pushGui(s);
++}
++
+ void GuiMenu::openScraperSettings()
+ {
+ 	auto s = new GuiSettings(mWindow, "SCRAPER");
+@@ -519,3 +579,54 @@ std::vector<HelpPrompt> GuiMenu::getHelpPrompts()
+ 	prompts.push_back(HelpPrompt("start", "close"));
+ 	return prompts;
+ }
++
++void GuiMenu::addServiceSwitch(GuiSettings* s, std::shared_ptr<SwitchComponent> switchComponent, const std::string label, const std::string setting, const std::string serviceName)
++{
++	switchComponent->setState(Settings::getInstance()->getBool(setting));
++	s->addWithLabel(label, switchComponent);
++	s->addSaveFunc([switchComponent, setting, serviceName] { 
++		bool enabled = switchComponent->getState();
++		if(enabled != Settings::getInstance()->getBool(setting))
++		{			
++			Settings::getInstance()->setBool(setting, enabled);
++			if(enabled) 
++			{
++				system(("mv /etc/init.d/disabled." + serviceName + " /etc/init.d/" + serviceName).c_str());
++				system(("sh /etc/init.d/" + serviceName + " start").c_str());
++			} 
++			else
++			{
++				system(("sh /etc/init.d/" + serviceName + " stop").c_str());
++				system(("mv /etc/init.d/" + serviceName + " /etc/init.d/disabled." + serviceName).c_str());	
++			}
++		}		
++	});
++}
++
++void GuiMenu::addEditableTextComponent(GuiSettings* s, const std::string label, std::shared_ptr<GuiComponent> ed, std::string value)
++{	
++	ComponentListRow row;
++
++	auto lbl = std::make_shared<TextComponent>(mWindow, strToUpper(label), Font::get(FONT_SIZE_MEDIUM), 0x777777FF);
++	row.addElement(lbl, true); // label
++
++	row.addElement(ed, true);
++
++	auto spacer = std::make_shared<GuiComponent>(mWindow);
++	spacer->setSize(Renderer::getScreenWidth() * 0.005f, 0);
++	row.addElement(spacer, false);
++
++	auto bracket = std::make_shared<ImageComponent>(mWindow);
++	bracket->setImage(":/arrow.svg");
++	bracket->setResize(Vector2f(0, lbl->getFont()->getLetterHeight()));
++	row.addElement(bracket, false);
++
++	auto updateVal = [ed](const std::string& newVal) { ed->setValue(newVal); }; // ok callback (apply new value to ed)
++	row.makeAcceptInputHandler([this, label, ed, updateVal] {
++		mWindow->pushGui(new GuiTextEditPopupKeyboard(mWindow, label, ed->getValue(), updateVal, false));
++	});
++
++	assert(ed);
++	s->addRow(row);
++	ed->setValue(value);
++}
+\ No newline at end of file
+diff --git a/es-app/src/guis/GuiMenu.h b/es-app/src/guis/GuiMenu.h
+index da8406b..4557655 100644
+--- a/es-app/src/guis/GuiMenu.h
++++ b/es-app/src/guis/GuiMenu.h
+@@ -3,6 +3,8 @@
+ #define ES_APP_GUIS_GUI_MENU_H
+ 
+ #include "components/MenuComponent.h"
++#include "components/SwitchComponent.h"
++#include "guis/GuiSettings.h"
+ #include "GuiComponent.h"
+ 
+ class GuiMenu : public GuiComponent
+@@ -18,6 +20,7 @@ public:
+ private:
+ 	void addEntry(const char* name, unsigned int color, bool add_arrow, const std::function<void()>& func);
+ 	void addVersionInfo();
++	void openSimplyRetroSettings();
+ 	void openCollectionSystemSettings();
+ 	void openConfigInput();
+ 	void openOtherSettings();
+@@ -26,9 +29,12 @@ private:
+ 	void openScreensaverOptions();
+ 	void openSoundSettings();
+ 	void openUISettings();
++	void addServiceSwitch(GuiSettings* s, std::shared_ptr<SwitchComponent> switchComponent, const std::string label, const std::string setting, const std::string serviceName);
++	void addEditableTextComponent(GuiSettings* s, const std::string label, std::shared_ptr<GuiComponent> ed, std::string value);
+ 
+ 	MenuComponent mMenu;
+ 	TextComponent mVersion;
+ };
+ 
+ #endif // ES_APP_GUIS_GUI_MENU_H
++
+diff --git a/es-core/CMakeLists.txt b/es-core/CMakeLists.txt
+index 91c945c..0b27532 100644
+--- a/es-core/CMakeLists.txt
++++ b/es-core/CMakeLists.txt
+@@ -52,6 +52,7 @@ set(CORE_HEADERS
+ 	${CMAKE_CURRENT_SOURCE_DIR}/src/guis/GuiInputConfig.h
+ 	${CMAKE_CURRENT_SOURCE_DIR}/src/guis/GuiMsgBox.h
+ 	${CMAKE_CURRENT_SOURCE_DIR}/src/guis/GuiTextEditPopup.h
++	${CMAKE_CURRENT_SOURCE_DIR}/src/guis/GuiTextEditPopupKeyboard.h
+ 
+ 	# Resources
+ 	${CMAKE_CURRENT_SOURCE_DIR}/src/resources/Font.h
+@@ -111,6 +112,7 @@ set(CORE_SOURCES
+ 	${CMAKE_CURRENT_SOURCE_DIR}/src/guis/GuiInputConfig.cpp
+ 	${CMAKE_CURRENT_SOURCE_DIR}/src/guis/GuiMsgBox.cpp
+ 	${CMAKE_CURRENT_SOURCE_DIR}/src/guis/GuiTextEditPopup.cpp
++	${CMAKE_CURRENT_SOURCE_DIR}/src/guis/GuiTextEditPopupKeyboard.cpp
+ 
+ 	# Resources
+ 	${CMAKE_CURRENT_SOURCE_DIR}/src/resources/Font.cpp
+diff --git a/es-core/src/Settings.cpp b/es-core/src/Settings.cpp
+index 546cec5..2e52476 100644
+--- a/es-core/src/Settings.cpp
++++ b/es-core/src/Settings.cpp
+@@ -53,6 +53,12 @@ void Settings::setDefaults()
+ 
+ 	mBoolMap["VSync"] = true;
+ 
++	mBoolMap["EnableWiFi"] = false;
++	mBoolMap["EnableFTP"] = false;
++	mBoolMap["EnableSSH"] = false;
++	mStringMap["WiFiSSID"] = "";
++	mStringMap["WiFiPSK"] = "";
++
+ 	mBoolMap["EnableSounds"] = true;
+ 	mBoolMap["ShowHelpPrompts"] = true;
+ 	mBoolMap["ScrapeRatings"] = true;
+@@ -208,3 +214,4 @@ SETTINGS_GETSET(bool, mBoolMap, getBool, setBool);
+ SETTINGS_GETSET(int, mIntMap, getInt, setInt);
+ SETTINGS_GETSET(float, mFloatMap, getFloat, setFloat);
+ SETTINGS_GETSET(const std::string&, mStringMap, getString, setString);
++
+diff --git a/es-core/src/components/ButtonComponent.cpp b/es-core/src/components/ButtonComponent.cpp
+index 4ef9984..d4e822f 100644
+--- a/es-core/src/components/ButtonComponent.cpp
++++ b/es-core/src/components/ButtonComponent.cpp
+@@ -4,7 +4,7 @@
+ #include "Renderer.h"
+ #include "Util.h"
+ 
+-ButtonComponent::ButtonComponent(Window* window, const std::string& text, const std::string& helpText, const std::function<void()>& func) : GuiComponent(window),
++ButtonComponent::ButtonComponent(Window* window, const std::string& text, const std::string& helpText, const std::function<void()>& func, bool toUpper) : GuiComponent(window),
+ 	mBox(window, ":/button.png"),
+ 	mFont(Font::get(FONT_SIZE_MEDIUM)), 
+ 	mFocused(false), 
+@@ -12,7 +12,7 @@ ButtonComponent::ButtonComponent(Window* window, const std::string& text, const
+ 	mTextColorFocused(0xFFFFFFFF), mTextColorUnfocused(0x777777FF)
+ {
+ 	setPressedFunc(func);
+-	setText(text, helpText);
++	setText(text, helpText, toUpper);
+ 	updateImage();
+ }
+ 
+@@ -38,9 +38,9 @@ bool ButtonComponent::input(InputConfig* config, Input input)
+ 	return GuiComponent::input(config, input);
+ }
+ 
+-void ButtonComponent::setText(const std::string& text, const std::string& helpText)
++void ButtonComponent::setText(const std::string& text, const std::string& helpText, bool toUpper)
+ {
+-	mText = strToUpper(text);
++	mText = toUpper ? strToUpper(text) : text;
+ 	mHelpText = helpText;
+ 	
+ 	mTextCache = std::unique_ptr<TextCache>(mFont->buildTextCache(mText, 0, 0, getCurTextColor()));
+diff --git a/es-core/src/components/ButtonComponent.h b/es-core/src/components/ButtonComponent.h
+index 6528820..644cf76 100644
+--- a/es-core/src/components/ButtonComponent.h
++++ b/es-core/src/components/ButtonComponent.h
+@@ -10,7 +10,7 @@ class TextCache;
+ class ButtonComponent : public GuiComponent
+ {
+ public:
+-	ButtonComponent(Window* window, const std::string& text = "", const std::string& helpText = "", const std::function<void()>& func = nullptr);
++	ButtonComponent(Window* window, const std::string& text = "", const std::string& helpText = "", const std::function<void()>& func = nullptr, bool toUpper = true);
+ 
+ 	void setPressedFunc(std::function<void()> f);
+ 
+@@ -19,7 +19,7 @@ public:
+ 	bool input(InputConfig* config, Input input) override;
+ 	void render(const Transform4x4f& parentTrans) override;
+ 
+-	void setText(const std::string& text, const std::string& helpText);
++	void setText(const std::string& text, const std::string& helpText, bool toUpper = true);
+ 
+ 	inline const std::string& getText() const { return mText; };
+ 	inline const std::function<void()>& getPressedFunc() const { return mPressedFunc; };
+diff --git a/es-core/src/components/MenuComponent.cpp b/es-core/src/components/MenuComponent.cpp
+index 63348d6..775d61f 100644
+--- a/es-core/src/components/MenuComponent.cpp
++++ b/es-core/src/components/MenuComponent.cpp
+@@ -124,6 +124,43 @@ std::shared_ptr<ComponentGrid> makeButtonGrid(Window* window, const std::vector<
+ 	return buttonGrid;
+ }
+ 
++std::shared_ptr<ComponentGrid> makeMultiDimButtonGrid(Window* window, const std::vector< std::vector< std::shared_ptr<ButtonComponent> > >& buttons, const float outerWidth, const float outerHeight)
++{
++    const int sizeX = (int) buttons.at(0).size();
++    const int sizeY = (int) buttons.size();
++    const float buttonHeight = buttons.at(0).at(0)->getSize().y();
++    const float gridHeight = (buttonHeight + BUTTON_GRID_VERT_PADDING + 2) * (float)sizeY;
++
++    float horizPadding = (float) BUTTON_GRID_HORIZ_PADDING;
++    float gridWidth, buttonWidth;
++
++    do {
++        gridWidth = outerWidth - horizPadding; // to get centered because size * (button size + BUTTON_GRID_VERT_PADDING) let a half BUTTON_GRID_VERT_PADDING left / right marge
++        buttonWidth = (gridWidth / (float)sizeX) - horizPadding;
++        horizPadding -= 2;
++    } while ((buttonWidth < 100) && (horizPadding > 2));
++
++
++    std::shared_ptr<ComponentGrid> grid = std::make_shared<ComponentGrid>(window, Vector2i(sizeX, sizeY));
++
++    grid->setSize(gridWidth, gridHeight < outerHeight ? gridHeight : outerHeight);
++
++    for (int x = 0; x < sizeX; x++)
++        grid->setColWidthPerc(x, (float) 1 / (float)sizeX);
++
++    for (int y = 0; y < sizeY; y++)
++    {
++        for (int x = 0; x < sizeX; x++)
++        {
++            const std::shared_ptr<ButtonComponent>& button = buttons.at(y).at(x);
++            button->setSize(buttonWidth, buttonHeight);
++            grid->setEntry(button, Vector2i(x, y), true, false);
++        }
++    }
++
++    return grid;
++}
++
+ std::shared_ptr<ImageComponent> makeArrow(Window* window)
+ {
+ 	auto bracket = std::make_shared<ImageComponent>(window);
+diff --git a/es-core/src/components/MenuComponent.h b/es-core/src/components/MenuComponent.h
+index 8574d88..642b247 100644
+--- a/es-core/src/components/MenuComponent.h
++++ b/es-core/src/components/MenuComponent.h
+@@ -13,6 +13,7 @@ class ButtonComponent;
+ class ImageComponent;
+ 
+ std::shared_ptr<ComponentGrid> makeButtonGrid(Window* window, const std::vector< std::shared_ptr<ButtonComponent> >& buttons);
++std::shared_ptr<ComponentGrid> makeMultiDimButtonGrid(Window* window, const std::vector< std::vector< std::shared_ptr<ButtonComponent> > >& buttons, float outerWidth, float outerHeight);
+ std::shared_ptr<ImageComponent> makeArrow(Window* window);
+ 
+ #define TITLE_VERT_PADDING (Renderer::getScreenHeight()*0.0637f)
+diff --git a/es-core/src/components/TextEditComponent.h b/es-core/src/components/TextEditComponent.h
+index 74e743a..9f6c76d 100644
+--- a/es-core/src/components/TextEditComponent.h
++++ b/es-core/src/components/TextEditComponent.h
+@@ -34,10 +34,10 @@ public:
+ 
+ 	virtual std::vector<HelpPrompt> getHelpPrompts() override;
+ 
+-private:
+ 	void startEditing();
+ 	void stopEditing();
+ 
++private:
+ 	void onTextChanged();
+ 	void onCursorChanged();
+ 
+diff --git a/es-core/src/guis/GuiTextEditPopupKeyboard.cpp b/es-core/src/guis/GuiTextEditPopupKeyboard.cpp
+new file mode 100644
+index 0000000..f9d4927
+--- /dev/null
++++ b/es-core/src/guis/GuiTextEditPopupKeyboard.cpp
+@@ -0,0 +1,208 @@
++#include "guis/GuiTextEditPopupKeyboard.h"
++#include "components/MenuComponent.h"
++
++GuiTextEditPopupKeyboard::GuiTextEditPopupKeyboard(Window* window, const std::string& title, const std::string& initValue,
++	const std::function<void(const std::string&)>& okCallback, bool multiLine, const std::string& acceptBtnText)
++	: GuiComponent(window),
++	  mBackground(window, ":/frame.png"),
++	  mGrid(window, Vector2i(1, 4)),
++	  mMultiLine(multiLine)
++{
++	addChild(&mBackground);
++	addChild(&mGrid);
++
++	mTitle = std::make_shared<TextComponent>(mWindow, strToUpper(title), Font::get(FONT_SIZE_LARGE), 0x555555FF, ALIGN_CENTER);
++
++	mText = std::make_shared<TextEditComponent>(mWindow);
++	mText->setValue(initValue);
++
++	if (!mMultiLine)
++		mText->setCursor(initValue.size());
++
++	// Header
++	mGrid.setEntry(mTitle, Vector2i(0, 0), false, true);
++
++	// Text edit add
++	mGrid.setEntry(mText, Vector2i(0, 1), true, false, Vector2i(1, 1));
++
++	std::vector< std::vector< std::shared_ptr<ButtonComponent> > > buttonList;
++
++	// Keyboard
++	// Case for if multiline is enabled, then don't create the keyboard.
++	if (!mMultiLine) {
++
++		std::vector<std::array<std::string, 12> > lines;
++
++		lines.push_back({ "1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "_", "+" });
++        lines.push_back({ "!", "@", "#", "$", "%", "^", "&", "*", "(", ")", "-", "=" });
++
++        lines.push_back({ "à", "ä", "è", "ë", "ì", "ï", "ò", "ö", "ù", "ü", "¨", "¿" });
++        lines.push_back({ "á", "â", "é", "ê", "í", "î", "ó", "ô", "ú", "û", "ñ", "¡" });
++
++        lines.push_back({ "q", "w", "e", "r", "t", "y", "u", "i", "o", "p", "{", "}" });
++        lines.push_back({ "Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P", "[", "]" });
++
++        lines.push_back({ "a", "s", "d", "f", "g", "h", "j", "k", "l", ";", "\"", "|" });
++        lines.push_back({ "A", "S", "D", "F", "G", "H", "J", "K", "L", ":", "'", "\\" });
++
++        // Special case, SHIFT key at position 0
++        lines.push_back({ "", "~", "z", "x", "c", "v", "b", "n", "m", ",", ".", "?" });
++        lines.push_back({ "", "`", "Z", "X", "C", "V", "B", "N", "M", "<", ">", "/" });
++
++	    for (unsigned int i = 0; i < 5; i++)
++	    {
++	      std::vector< std::shared_ptr<ButtonComponent> > buttons;
++        for (unsigned int j = 0; j < 12; j++)
++        {
++          if (i == 4 && j == 0)
++          {
++            // Special case for shift key
++            mShiftButton = std::make_shared<ButtonComponent>(mWindow, "SHIFT", "SHIFT", [this] {
++              switchShift();
++            });
++            buttons.push_back(mShiftButton);
++          }
++          else buttons.push_back(makeButton(lines.at(2 * i).at(j), lines.at(2 * i + 1).at(j)));
++        }
++			  buttonList.push_back(buttons);
++	    }
++	}
++
++	const float screenHeightAvailable = Renderer::getScreenHeight() - getHelpStyle().font->getHeight(); // Height - Help Height
++    const float gridWidth = Renderer::getScreenWidth() * 0.98f;
++    const float gridHeight = screenHeightAvailable * ((float) buttonList.size() / (float) (buttonList.size() + 3) ); // 3 => share space with mTitle + mText + buttons
++
++	// Add keyboard keys
++	mKeyboardGrid = makeMultiDimButtonGrid(mWindow, buttonList, gridWidth, gridHeight);
++
++	mGrid.setEntry(mKeyboardGrid, Vector2i(0, 2), true, false);
++
++	std::vector< std::shared_ptr<ButtonComponent> > buttons;
++
++	buttons.push_back(std::make_shared<ButtonComponent>(mWindow, acceptBtnText, acceptBtnText, [this, okCallback] { okCallback(mText->getValue()); delete this; }));
++	buttons.push_back(std::make_shared<ButtonComponent>(mWindow, "SPACE", "SPACE", [this] {
++		mText->startEditing();
++		mText->textInput(" ");
++		mText->stopEditing();
++	}));
++	buttons.push_back(std::make_shared<ButtonComponent>(mWindow, "DELETE", "DELETE", [this] {
++		mText->startEditing();
++		mText->textInput("\b");
++		mText->stopEditing();
++	}));
++	buttons.push_back(std::make_shared<ButtonComponent>(mWindow, "CANCEL", "CANCEL", [this] { delete this; }));
++
++	// Add buttons
++	mButtons = makeButtonGrid(mWindow, buttons);
++	mGrid.setEntry(mButtons, Vector2i(0, 3), true, false);
++
++	// Determine size from text size
++	float textHeight = mText->getFont()->getHeight();
++	if (multiLine)
++		textHeight *= 6;
++	mText->setSize(gridWidth - 40, textHeight);
++
++	// Determine available free space to get a more airy grid
++	float height = mTitle->getFont()->getHeight() + textHeight + mKeyboardGrid->getSize().y() + (mMultiLine ? 0 : mButtons->getSize().y());
++	float padding = std::min(40.0f, (screenHeightAvailable - height) * 0.75f);
++
++	// If multiline, set all size back to default, else draw size for keyboard.
++	if (mMultiLine)
++		setSize(Renderer::getScreenWidth() * 0.75f, height + padding);
++	else
++		setSize(gridWidth, height + padding);
++
++	setPosition((Renderer::getScreenWidth() - mSize.x()) / 2, (screenHeightAvailable - mSize.y()) / 2);
++}
++
++std::shared_ptr<ButtonComponent> GuiTextEditPopupKeyboard::makeButton(const std::string& key, const std::string& shiftedKey)
++{
++    std::shared_ptr<ButtonComponent> button = std::make_shared<ButtonComponent>(mWindow, key, key, [this, key, shiftedKey] {
++        mText->startEditing();
++        if (mShift)
++        	mText->textInput(shiftedKey.c_str());
++        else
++        	mText->textInput(key.c_str());
++        mText->stopEditing();
++    }, false);
++    KeyboardButton kb(button, key, shiftedKey);
++    keyboardButtons.push_back(kb);
++    return button;
++}
++
++void GuiTextEditPopupKeyboard::onSizeChanged()
++{
++	mBackground.fitTo(mSize, Vector3f::Zero(), Vector2f(-32, -32));
++
++	mText->setSize(mSize.x() - 40, mText->getSize().y());
++
++	float fullHeight = mTitle->getFont()->getHeight() + mText->getSize().y() + mKeyboardGrid->getSize().y() + (mMultiLine ? 0 : mButtons->getSize().y());
++
++	// update grid
++	mGrid.setRowHeightPerc(0, mTitle->getFont()->getHeight() / fullHeight);
++	mGrid.setRowHeightPerc(1, mText->getSize().y() / fullHeight);
++	mGrid.setRowHeightPerc(2, mKeyboardGrid->getSize().y() / fullHeight);
++	mGrid.setRowHeightPerc(3, mMultiLine ? 0 : mButtons->getSize().y() / fullHeight);
++
++	mGrid.setSize(mSize);
++
++	mKeyboardGrid->onSizeChanged();
++}
++
++bool GuiTextEditPopupKeyboard::input(InputConfig* config, Input input)
++{
++	if (GuiComponent::input(config, input))
++		return true;
++
++	// pressing back when not text editing closes us
++	if (config->isMappedTo("a", input) && (input.value != 0))
++	{
++		delete this;
++		return true;
++	}
++
++	// For deleting a chara (Left Top Button)
++	if (config->isMappedTo("PageUp", input) && (input.value != 0)) {
++		mText->startEditing();
++		mText->textInput("\b");
++		mText->stopEditing();
++	}
++
++	// For Adding a space (Right Top Button)
++	if (config->isMappedTo("PageDown", input) && (input.value != 0)) {
++		mText->startEditing();
++		mText->textInput(" ");
++		mText->stopEditing();
++	}
++
++	// For Shifting (Y)
++	if (config->isMappedTo("y", input) && (input.value != 0)) {
++		switchShift();
++	}
++
++	return false;
++}
++
++// Shifts the keys when user hits the shift button.
++void GuiTextEditPopupKeyboard::switchShift()
++{
++	mShift = !mShift;
++
++  for (auto & kb: keyboardButtons)
++  {
++    const std::string& text = mShift ? kb.shiftedKey : kb.key;
++    kb.button->setText(text, text, false);
++  }
++
++  updateHelpPrompts();
++}
++
++std::vector<HelpPrompt> GuiTextEditPopupKeyboard::getHelpPrompts()
++{
++	std::vector<HelpPrompt> prompts = mGrid.getHelpPrompts();
++	prompts.push_back(HelpPrompt("y", "SHIFT"));
++	prompts.push_back(HelpPrompt("a", "BACK"));
++	prompts.push_back(HelpPrompt("r", "SPACE"));
++	prompts.push_back(HelpPrompt("l", "DELETE"));
++	return prompts;
++}
+\ No newline at end of file
+diff --git a/es-core/src/guis/GuiTextEditPopupKeyboard.h b/es-core/src/guis/GuiTextEditPopupKeyboard.h
+new file mode 100644
+index 0000000..a260c93
+--- /dev/null
++++ b/es-core/src/guis/GuiTextEditPopupKeyboard.h
+@@ -0,0 +1,60 @@
++#include "GuiComponent.h"
++
++#include "components/NinePatchComponent.h"
++#include "components/ButtonComponent.h"
++#include "components/ComponentGrid.h"
++#include "components/TextEditComponent.h"
++#include "components/TextComponent.h"
++
++class GuiTextEditPopupKeyboard : public GuiComponent
++{
++public:
++	GuiTextEditPopupKeyboard(Window* window, const std::string& title, const std::string& initValue,
++		                       const std::function<void(const std::string&)>& okCallback, bool multiLine,
++		                       const std::string& acceptBtnText);
++  GuiTextEditPopupKeyboard(Window* window, const std::string& title, const std::string& initValue,
++                           const std::function<void(const std::string&)>& okCallback, bool multiLine)
++    : GuiTextEditPopupKeyboard(window, title, initValue, okCallback, multiLine, "OK")
++  {
++  }
++
++	bool input(InputConfig* config, Input input) override;
++	void update(int) override {}
++	void onSizeChanged() override;
++	std::vector<HelpPrompt> getHelpPrompts() override;
++
++private:
++
++    class KeyboardButton
++    {
++    public:
++        std::shared_ptr<ButtonComponent> button;
++		    const std::string key;
++		    const std::string shiftedKey;
++        KeyboardButton(const std::shared_ptr<ButtonComponent>& b, const std::string& k, const std::string& sk)
++          : button(b),
++            key(k),
++            shiftedKey(sk)
++        {
++        };
++    };
++
++	void switchShift();
++    std::shared_ptr<ButtonComponent> makeButton(const std::string& key, const std::string& shiftedKey);
++
++    NinePatchComponent mBackground;
++	ComponentGrid mGrid;
++
++	std::vector< KeyboardButton > keyboardButtons;
++
++	std::shared_ptr<TextComponent> mTitle;
++	std::shared_ptr<TextEditComponent> mText;
++	std::shared_ptr<ComponentGrid> mKeyboardGrid;
++	std::shared_ptr<ComponentGrid> mButtonGrid;
++	std::shared_ptr<ComponentGrid> mButtons;
++
++	bool mMultiLine;
++	bool mShift = false;
++	std::shared_ptr<ButtonComponent> mShiftButton;
++};
++

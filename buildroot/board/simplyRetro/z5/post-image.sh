@@ -11,7 +11,6 @@ cp board/simplyRetro/${BOARD_NAME}/genimage/config.txt ${BINARIES_DIR}/config.tx
 cp board/simplyRetro/${BOARD_NAME}/genimage/cmdline.txt ${BINARIES_DIR}/cmdline.txt
 cp board/simplyRetro/${BOARD_NAME}/genimage/retrogame.cfg ${BINARIES_DIR}/retrogame.cfg
 cp board/simplyRetro/${BOARD_NAME}/genimage/retropower.cfg ${BINARIES_DIR}/retropower.cfg
-cp board/simplyRetro/${BOARD_NAME}/genimage/wpa_supplicant.conf ${BINARIES_DIR}/wpa_supplicant.conf
 
 rm -rf "${GENIMAGE_TMP}"
 

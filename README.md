@@ -195,9 +195,6 @@ If you want to use the distribution just use Etcher to copy the img file to a SD
 
 ### Boot Partition
 
-#### wpa_supplicant.conf
-Configure your WLAN connection here to be able to connect via FTP.
-
 #### config.txt
 Please be aware, that the default config.txt will rotate the screen. This is necessary, if you are you using the same screen as me.
 
@@ -220,8 +217,10 @@ To use the full size of you SD Card you should execute the following two scripts
 /root/reformat.sh (will reboot the system after execution)  
 /root/resize.sh
 
-### FTP
-If you configured the *wpa_supplicant.conf* on the boot partition, you are able to connect via FTP to copy your roms to the system. 
+### WiFi, FTP & SSH
+You are able to set your WiFi SSID and PSK through the Emulationstation menu. Press 'Start' and go into the 'simplyRetro' menu.
+After setting the WiFi, just enable any service you need. **I recommend to disable the services after usage to reduce battery load and 
+to speed up the boot process.**
 
 ### ROMs and BIOS folder
 The ROMs and BIOS folder are located at */root/roms* and */root/bios*. You are able to change the splash screen, if you want. It is also located at the */root* folder.
@@ -237,5 +236,6 @@ If there will be an update to the distribution, I will try to distribute the upd
 ## Credits
 Thanks to [NeoHorizon](https://github.com/NeonHorizon/lipopi) and [Craic](https://github.com/craic/pi_power) for the work on the power circuits. I took their work and reworked the circuit a bit and created a custom battery monitor in C.  
 Thanks to [BuildRoot](https://buildroot.org/) for the creation of this great system which enabled me to create a custom linux distribution.  
-Thanks to [RecalBox](https://www.recalbox.com/) for their work on the packages for BuildRoot. I took the RetroArch and LibRetro packages and reworked them a bit to work on my distribution.  
+Thanks to [RecalBox](https://www.recalbox.com/) for their work on the packages for BuildRoot. I took the RetroArch and LibRetro packages and reworked them a bit to work on my distribution. Also thanks for the code of the on screen keyboard!
 Thanks to [ehettervik](https://retropie.org.uk/forum/topic/4611/runcommand-system-splashscreens) for the emulator splashscreens.
+Thanks to [ProGM](https://progm.itch.io/doctor-how) for the GB homebrew game.
