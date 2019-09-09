@@ -12,7 +12,7 @@
 
 powerConfig config;
 char configFile[] = "/boot/retropower.cfg";
-int checkIntervalInSec = 1;
+int checkIntervalInSec = 2;
 
 int main(int argc, char *argv[]) 
 {    
