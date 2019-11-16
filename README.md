@@ -5,6 +5,8 @@
 
 This repository contains everything to rebuild the *simplyRetro Z5*.
 The *Z5* is my first attempt to build a custom emulation handheld from scratch.
+It runs a custom linux image for emulation to accomplish a fast boot time (10 seconds).
+But you are also able to use Retropie or Lakka for example (in both case you will loose the on screen battery indicator).
 
 I maintained a really small [build log](https://www.3dgeeks.club/d/32-simplyretro-z5-a-raspberry-pi-zero-handheld/) in the 3DGeeks forum.
 
