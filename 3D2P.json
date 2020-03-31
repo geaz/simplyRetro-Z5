@@ -1,0 +1,182 @@
+{
+    "name": "simplyRetro Z5",
+    "repositoryUrl": "https://github.com/geaz/simplyRetro-Z5.git",
+    "rawRepositoryUrl": "https://raw.githubusercontent.com/geaz/simplyRetro-Z5/master",
+    "status": "WIP",
+    "stls": [
+        {
+            "name": "2x Button",
+            "relativePath": "stl\\2x Button.stl",
+            "color": 16089126,
+            "status": "WIP",
+            "annotationList": [
+                {
+                    "id": 1,
+                    "text": "",
+                    "x": -1.1737751490621628,
+                    "y": 1.3599276335414225,
+                    "z": 1.6546519756840277
+                }
+            ]
+        },
+        {
+            "name": "2x Shoulder Button Mount",
+            "relativePath": "stl\\2x Shoulder Button Mount.stl",
+            "color": 16089126,
+            "status": "WIP",
+            "annotationList": []
+        },
+        {
+            "name": "2x Shoulder Button",
+            "relativePath": "stl\\2x Shoulder Button.stl",
+            "color": 16089126,
+            "status": "WIP",
+            "annotationList": []
+        },
+        {
+            "name": "2x Spacer (5x3",
+            "relativePath": "stl\\2x Spacer (5x3.5 - 2mm).stl",
+            "color": 16089126,
+            "status": "WIP",
+            "annotationList": [
+                {
+                    "id": 0,
+                    "text": "test",
+                    "x": -2.2891099929001975,
+                    "y": 0.8167995215469296,
+                    "z": 1.004630605402746
+                }
+            ]
+        },
+        {
+            "name": "4x Button",
+            "relativePath": "stl\\4x Button.stl",
+            "color": 16089126,
+            "status": "WIP",
+            "annotationList": [
+                {
+                    "id": 0,
+                    "text": "",
+                    "x": -3.2380797702525523,
+                    "y": 3.0000000000000018,
+                    "z": 1.5462367331385696
+                },
+                {
+                    "id": 1,
+                    "text": "",
+                    "x": 2.4508584435335425,
+                    "y": 0.005708767929770515,
+                    "z": 3.7737463571479344
+                }
+            ]
+        },
+        {
+            "name": "Bottom Shell",
+            "relativePath": "stl\\Bottom Shell.stl",
+            "color": 16089126,
+            "status": "WIP",
+            "annotationList": []
+        },
+        {
+            "name": "Control Mount A",
+            "relativePath": "stl\\Control Mount A.stl",
+            "color": 16089126,
+            "status": "Done",
+            "annotationList": []
+        },
+        {
+            "name": "Control Mount B",
+            "relativePath": "stl\\Control Mount B.stl",
+            "color": 16089126,
+            "status": "WIP",
+            "annotationList": []
+        },
+        {
+            "name": "Control Mount C",
+            "relativePath": "stl\\Control Mount C.stl",
+            "color": 16089126,
+            "status": "WIP",
+            "annotationList": []
+        },
+        {
+            "name": "Cross",
+            "relativePath": "stl\\Cross.stl",
+            "color": 16089126,
+            "status": "Done",
+            "annotationList": [
+                {
+                    "id": 0,
+                    "text": "Test",
+                    "x": 0.2297754898630915,
+                    "y": -2.0000000000000013,
+                    "z": 6.3673677288888255
+                },
+                {
+                    "id": 1,
+                    "text": "",
+                    "x": -9.27840225870966,
+                    "y": 2.8043437081011064,
+                    "z": 4.999011250871368
+                }
+            ]
+        },
+        {
+            "name": "Display Frame",
+            "relativePath": "stl\\Display Frame.stl",
+            "color": 16089126,
+            "status": "WIP",
+            "annotationList": []
+        },
+        {
+            "name": "Electronic Mount",
+            "relativePath": "stl\\Electronic Mount.stl",
+            "color": 16089126,
+            "status": "WIP",
+            "annotationList": []
+        },
+        {
+            "name": "Power Button",
+            "relativePath": "stl\\Power Button.stl",
+            "color": 16089126,
+            "status": "WIP",
+            "annotationList": [
+                {
+                    "id": 0,
+                    "text": "TEst",
+                    "x": 0.6646527753643595,
+                    "y": -1.389111729665768,
+                    "z": 1.9664967821840569
+                }
+            ]
+        },
+        {
+            "name": "Top Shell",
+            "relativePath": "stl\\Top Shell.stl",
+            "color": 16089126,
+            "status": "WIP",
+            "annotationList": []
+        }
+    ],
+    "gallery": [
+        {
+            "name": "1.jpg",
+            "relativePath": "images\\1.jpg",
+            "order": 0
+        },
+        {
+            "name": "10.jpg",
+            "relativePath": "images\\10.jpg",
+            "order": 0
+        },
+        {
+            "name": "2.jpg",
+            "relativePath": "images\\2.jpg",
+            "order": 0
+        },
+        {
+            "name": "11.jpg",
+            "relativePath": "images\\11.jpg",
+            "order": 0
+        }
+    ]
+}
