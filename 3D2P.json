@@ -2,21 +2,14 @@
     "name": "simplyRetro Z5",
     "repositoryUrl": "https://github.com/geaz/simplyRetro-Z5.git",
     "rawRepositoryUrl": "https://raw.githubusercontent.com/geaz/simplyRetro-Z5/master/",
+    "status": "Done",
     "stls": [
         {
             "name": "2x Button",
             "relativePath": "stl\\2x Button.stl",
-            "color": 5725279,
+            "color": 16089126,
             "status": "Done",
-            "annotationList": [
-                {
-                    "id": 0,
-                    "text": "**Test**\n\n*Test*\n\n[Google](http://google.de)",
-                    "x": -2.764997435902474,
-                    "y": 1.262452735416382,
-                    "z": 0.06342968884371666
-                }
-            ]
+            "annotationList": []
         },
         {
             "name": "2x Shoulder Button Mount",
@@ -29,85 +22,93 @@
             "name": "2x Shoulder Button",
             "relativePath": "stl\\2x Shoulder Button.stl",
             "color": 16089126,
-            "status": "WIP",
+            "status": "Done",
             "annotationList": []
         },
         {
-            "name": "2x Spacer (5x3",
+            "name": "2x Spacer (5x3.5 - 2mm)",
             "relativePath": "stl\\2x Spacer (5x3.5 - 2mm).stl",
             "color": 16089126,
-            "status": "WIP",
+            "status": "Done",
             "annotationList": []
         },
         {
             "name": "4x Button",
             "relativePath": "stl\\4x Button.stl",
             "color": 16089126,
-            "status": "WIP",
+            "status": "Done",
             "annotationList": []
         },
         {
             "name": "Bottom Shell",
             "relativePath": "stl\\Bottom Shell.stl",
             "color": 16089126,
-            "status": "WIP",
+            "status": "Done",
             "annotationList": []
         },
         {
             "name": "Control Mount A",
             "relativePath": "stl\\Control Mount A.stl",
             "color": 16089126,
-            "status": "WIP",
+            "status": "Done",
             "annotationList": []
         },
         {
             "name": "Control Mount B",
             "relativePath": "stl\\Control Mount B.stl",
             "color": 16089126,
-            "status": "WIP",
+            "status": "Done",
             "annotationList": []
         },
         {
             "name": "Control Mount C",
             "relativePath": "stl\\Control Mount C.stl",
             "color": 16089126,
-            "status": "WIP",
+            "status": "Done",
             "annotationList": []
         },
         {
             "name": "Cross",
             "relativePath": "stl\\Cross.stl",
             "color": 16089126,
-            "status": "WIP",
+            "status": "Done",
             "annotationList": []
         },
         {
             "name": "Display Frame",
             "relativePath": "stl\\Display Frame.stl",
             "color": 16089126,
-            "status": "WIP",
+            "status": "Done",
             "annotationList": []
         },
         {
             "name": "Electronic Mount",
             "relativePath": "stl\\Electronic Mount.stl",
             "color": 16089126,
-            "status": "WIP",
+            "status": "Done",
             "annotationList": []
         },
         {
             "name": "Power Button",
             "relativePath": "stl\\Power Button.stl",
             "color": 16089126,
-            "status": "WIP",
+            "status": "Done",
             "annotationList": []
         },
         {
             "name": "Top Shell",
             "relativePath": "stl\\Top Shell.stl",
             "color": 16089126,
-            "status": "WIP",
-            "annotationList": []
+            "status": "Done",
+            "annotationList": [
+                {
+                    "id": 0,
+                    "text": "Print the shell on the flat side and add support here.",
+                    "x": -64.6320745848125,
+                    "y": 5.300000190734848,
+                    "z": 23.84025273425421
+                }
+            ]
         }
     ],
     "gallery": [

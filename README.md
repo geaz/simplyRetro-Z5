@@ -1,8 +1,6 @@
 [![Thingiverse](https://img.shields.io/badge/Thingiverse-simplyRetro%20Z5-blue.svg)](https://www.thingiverse.com/thing:3671784)
 [![Thingiverse](https://img.shields.io/badge/Github-simplyRetro%20Z5-brightgreen.svg)](https://github.com/geaz/simplyRetro-Z5)
 
-# simplyRetro Z5
-
 This repository contains everything to rebuild the *simplyRetro Z5*.
 The *Z5* is my first attempt to build a custom emulation handheld from scratch.
 It runs a custom linux image for emulation to accomplish a fast boot time (10 seconds).
