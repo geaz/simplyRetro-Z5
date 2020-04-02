@@ -1,21 +1,20 @@
 {
     "name": "simplyRetro Z5",
     "repositoryUrl": "https://github.com/geaz/simplyRetro-Z5.git",
-    "rawRepositoryUrl": "https://raw.githubusercontent.com/geaz/simplyRetro-Z5/master",
-    "status": "WIP",
+    "rawRepositoryUrl": "https://raw.githubusercontent.com/geaz/simplyRetro-Z5/master/",
     "stls": [
         {
             "name": "2x Button",
             "relativePath": "stl\\2x Button.stl",
-            "color": 16089126,
-            "status": "WIP",
+            "color": 5725279,
+            "status": "Done",
             "annotationList": [
                 {
-                    "id": 1,
-                    "text": "",
-                    "x": -1.1737751490621628,
-                    "y": 1.3599276335414225,
-                    "z": 1.6546519756840277
+                    "id": 0,
+                    "text": "**Test**\n\n*Test*\n\n[Google](http://google.de)",
+                    "x": -2.764997435902474,
+                    "y": 1.262452735416382,
+                    "z": 0.06342968884371666
                 }
             ]
         },
@@ -23,7 +22,7 @@
             "name": "2x Shoulder Button Mount",
             "relativePath": "stl\\2x Shoulder Button Mount.stl",
             "color": 16089126,
-            "status": "WIP",
+            "status": "Done",
             "annotationList": []
         },
         {
@@ -38,37 +37,14 @@
             "relativePath": "stl\\2x Spacer (5x3.5 - 2mm).stl",
             "color": 16089126,
             "status": "WIP",
-            "annotationList": [
-                {
-                    "id": 0,
-                    "text": "test",
-                    "x": -2.2891099929001975,
-                    "y": 0.8167995215469296,
-                    "z": 1.004630605402746
-                }
-            ]
+            "annotationList": []
         },
         {
             "name": "4x Button",
             "relativePath": "stl\\4x Button.stl",
             "color": 16089126,
             "status": "WIP",
-            "annotationList": [
-                {
-                    "id": 0,
-                    "text": "",
-                    "x": -3.2380797702525523,
-                    "y": 3.0000000000000018,
-                    "z": 1.5462367331385696
-                },
-                {
-                    "id": 1,
-                    "text": "",
-                    "x": 2.4508584435335425,
-                    "y": 0.005708767929770515,
-                    "z": 3.7737463571479344
-                }
-            ]
+            "annotationList": []
         },
         {
             "name": "Bottom Shell",
@@ -81,7 +57,7 @@
             "name": "Control Mount A",
             "relativePath": "stl\\Control Mount A.stl",
             "color": 16089126,
-            "status": "Done",
+            "status": "WIP",
             "annotationList": []
         },
         {
@@ -102,23 +78,8 @@
             "name": "Cross",
             "relativePath": "stl\\Cross.stl",
             "color": 16089126,
-            "status": "Done",
-            "annotationList": [
-                {
-                    "id": 0,
-                    "text": "Test",
-                    "x": 0.2297754898630915,
-                    "y": -2.0000000000000013,
-                    "z": 6.3673677288888255
-                },
-                {
-                    "id": 1,
-                    "text": "",
-                    "x": -9.27840225870966,
-                    "y": 2.8043437081011064,
-                    "z": 4.999011250871368
-                }
-            ]
+            "status": "WIP",
+            "annotationList": []
         },
         {
             "name": "Display Frame",
@@ -139,15 +100,7 @@
             "relativePath": "stl\\Power Button.stl",
             "color": 16089126,
             "status": "WIP",
-            "annotationList": [
-                {
-                    "id": 0,
-                    "text": "TEst",
-                    "x": 0.6646527753643595,
-                    "y": -1.389111729665768,
-                    "z": 1.9664967821840569
-                }
-            ]
+            "annotationList": []
         },
         {
             "name": "Top Shell",
@@ -159,23 +112,13 @@
     ],
     "gallery": [
         {
-            "name": "1.jpg",
-            "relativePath": "images\\1.jpg",
+            "name": "cover.jpg",
+            "relativePath": "images\\cover.jpg",
             "order": 0
         },
         {
-            "name": "10.jpg",
-            "relativePath": "images\\10.jpg",
-            "order": 0
-        },
-        {
-            "name": "2.jpg",
-            "relativePath": "images\\2.jpg",
-            "order": 0
-        },
-        {
-            "name": "11.jpg",
-            "relativePath": "images\\11.jpg",
+            "name": "Internals.jpg",
+            "relativePath": "images\\Internals.jpg",
             "order": 0
         }
     ]
