@@ -1,22 +1,27 @@
 BOM for the US by [AxelNobody](https://www.thingiverse.com/AxelNobody/about)
 
-- [Elecrow 5 inch Display](https://www.amazon.com/Elecrow-Capacitive-interface-Supports-Raspberry/dp/B07FDYXPT7/ref=sxin_1_sp_qu_bss_is?__mk_de_DE=%C3%85M%C3%85%C5%BD%C3%95%C3%91&keywords=elecrow+5+inch&pd_rd_i=B07FDYXPT7&pd_rd_r=1e0caebd-4979-4766-a0c0-2a8cfa7bab73&pd_rd_w=GaHiL&pd_rd_wg=n7GaL&pf_rd_p=59c36603-576b-471f-8561-ef24e0883aa1&pf_rd_r=4WFG0P0H4D5N65V2BRXY&qid=1566750737&s=electronics)
-- [12x Adafruit Softbuttons](https://www.amazon.com/gp/product/B07KKN7GPB)
-- [1x 5mm Tactile Button for the Power Button](https://www.adafruit.com/product/367)
-- [1x Powerboost 1000c](https://www.amazon.com/gp/product/B01BMRBTH2)
-- [2x Speaker](https://www.amazon.com/gp/product/B00O9YHIDA/)
-this was actually the hardest one to find. I could not find any 34mm speakers. I ordered a 36mm because I figured it would be close enough, but it was too big. I replaced it with a 32mm speaker. These are very common, unlike the 34mm, and I found several inexpensive options. I tested it with a print of your case and it fits fine, some hot glue will easily keep it in place.
-- [FPV HDMI Adapter (1xA1, 1xC1 and 1x5cm Cable)](https://www.amazon.com/gp/product/B07DBVDS6Q)
-- [1x MCP3008 ADC](https://www.adafruit.com/product/856)
-- [1x Volume potentiometer](https://www.amazon.com/gp/product/B00O9Y6Z70)
-- [1x Jack Plug PJ-307](https://www.adafruit.com/product/1699)
-- [1x PAM8403 (Audio AMP)](https://www.amazon.com/gp/product/B00LODGV64/)
-- [1x 2500 mAh LiPo](https://www.adafruit.com/product/328)
-- [Stripboard](https://www.amazon.com/gp/product/B00C9NXP94)
-- [M3x8mm screws (Mounts and Shell)](https://www.amazon.com/gp/product/B016YZTEDI)
-- [M2.5x4mm screws (Electronics)](https://www.amazon.com/gp/product/B07HC3LQYS)
-- [Resistors (6,8K, 10K, 100K)](https://www.amazon.com/gp/product/B016NXK6QK/)
-- [1N4001 Diodes](https://www.adafruit.com/product/755)
-- [Velcro or double-faced adhesive tape to attach the PAM and circuits](https://www.amazon.com/gp/product/B00006IF60/)
-- [Raspberry Pi Zero W](https://www.adafruit.com/product/3400)
-- Wire :)
+| Part | Source | Notes |
+|---|---|---|
+| Elecrow 5 inch Display | [Amazon](https://www.amazon.com/Elecrow-Capacitive-interface-Supports-Raspberry/dp/B07FDYXPT7) |  |
+| 12x Adafruit Softbuttons | [Amazon](https://www.amazon.com/gp/product/B07KKN7GPB) [Mouser](https://www.mouser.com/ProductDetail/485-3101) |  |
+| 1x 5mm Tactile Button for the Power Button | [Adafruit](https://www.adafruit.com/product/367) [Mouser](https://www.mouser.com/ProductDetail/485-367) |  |
+| 1x Powerboost 1000c | [Amazon](https://www.amazon.com/gp/product/B01BMRBTH2) [Mouser](https://www.mouser.com/ProductDetail/485-2465) |  |
+| 2x Speaker | [Amazon](https://www.amazon.com/gp/product/B00O9YHIDA/) [Mouser](https://www.mouser.com/ProductDetail/243-K34WP-8OHM) | The Amazon speakers are suitable alternatives.  They can be attached with hot glue.  The Mouser sourced speakers are identical to the original |
+| FPV HDMI Adapter (1xA1, 1xC1 and 1x5cm Cable) | [Amazon](https://www.amazon.com/gp/product/B073335YLW) |  |
+| 1x MCP3008 ADC | [Adafruit](https://www.adafruit.com/product/856) [Mouser](https://www.mouser.com/ProductDetail/579-MCP3008-I-P) |  |
+| 1x Volume potentiometer | [Amazon](https://www.amazon.com/gp/product/B00O9Y6Z70) [Mouser(Untested)](https://www.mouser.com/ProductDetail/688-RK10J12E0A0A) |  |
+| 1x Jack Plug PJ-307 | [Adafruit](https://www.adafruit.com/product/1699) [Mouser](https://www.mouser.com/ProductDetail/485-1699) |  |
+| 1x PAM8403 (Audio AMP) | [Amazon](https://www.amazon.com/gp/product/B00LODGV64/) |  |
+| 1x 2500 mAh LiPo | [Adafruit](https://www.adafruit.com/product/328) [Amazon](https://www.amazon.com/gp/product/B07TVDQ479) |  |
+| Stripboard | [Amazon](https://www.amazon.com/gp/product/B00C9NXP94) |  |
+| M3x8mm screws (Mounts and Shell) | [Amazon](https://www.amazon.com/gp/product/B016YZTEDI) |  |
+| M2.5x4mm screws (Electronics) | [Amazon](https://www.amazon.com/gp/product/B07HC3LQYS) |  |
+| Resistor Pack (needs 6.8k, 10k, 100k) | [Amazon](https://www.amazon.com/gp/product/B016NXK6QK/) |  |
+| OR |
+| 6.8k Resistors | [Mouser](https://www.mouser.com/ProductDetail/660-MF1-4LCT52R682G) |  |
+| 10k Resistors | [Mouser](https://www.mouser.com/ProductDetail/660-MF1-4LCT52R103G) |  |
+| 100k Resistors | [Mouser](https://www.mouser.com/ProductDetail/660-MF1-4LCT52R104G) |  |
+| 1N4001 Diodes | [Adafruit](https://www.adafruit.com/product/755) [Mouser](https://www.mouser.com/ProductDetail/863-1N4001G) |  |
+| Velcro or double-faced adhesive tape to attach the PAM and circuits | [Amazon](https://www.amazon.com/gp/product/B00006IF60/) |  |
+| Raspberry Pi Zero W | [Adafruit](https://www.adafruit.com/product/3400) [Mouser](https://www.mouser.com/ProductDetail/713-110991027) |  |
+| Wire | Use what you have :) |  |
