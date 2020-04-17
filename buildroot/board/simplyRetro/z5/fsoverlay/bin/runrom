@@ -1,9 +1,0 @@
-#!/bin/sh
-
-SYSTEM="${1}"
-CMD="${2}"
-
-clear
-fbv -e -r -d 50 /root/.emulationstation/romsplash/${SYSTEM}/launching.png &
-eval $CMD
-clear
