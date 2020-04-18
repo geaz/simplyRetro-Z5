@@ -45,8 +45,8 @@
 			<secondaryColor>00000055</secondaryColor>
 			<fontPath>./_inc/font/RobotoCondensed-Regular.ttf</fontPath>
 			<fontSize >0.05</fontSize >
-			<size>1 0.69</size>
-			<pos>0 0.25</pos>
+			<size>1 0.70</size>
+			<pos>0 0.20</pos>
 		</textlist>
 	</view>
 </theme>
