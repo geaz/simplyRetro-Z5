@@ -1,0 +1,4 @@
+#!/bin/sh
+
+echo "Starting RetroPower"
+/usr/bin/retropower &

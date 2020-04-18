@@ -1,0 +1,25 @@
+#!/bin/sh
+
+esdir="/usr/bin"
+while true; do
+    rm -f /tmp/es-restart /tmp/es-sysrestart /tmp/es-shutdown
+    eval "$esdir/emulationstation --no-splash &>/dev/null"
+    ret=$?
+    [ -f /tmp/es-restart ] && continue
+    if [ -f /tmp/es-sysrestart ]; then
+	clear
+	fbv -e -r /root/splash.png &
+        rm -f /tmp/es-sysrestart
+        reboot
+        break
+    fi
+    if [ -f /tmp/es-shutdown ]; then
+	clear
+	fbv -e -r /root/splash.png &
+        rm -f /tmp/es-shutdown
+        poweroff
+        break
+    fi
+    break
+done
+exit $ret

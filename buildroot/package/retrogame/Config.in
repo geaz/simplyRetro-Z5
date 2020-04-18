@@ -1,0 +1,6 @@
+config BR2_PACKAGE_RETROGAME
+	bool "Adafruit Retro Game"
+	help
+	  Raspberry Pi GPIO-to-virtual-keyboard utility for classic game emulators.
+
+	  https://github.com/adafruit/Adafruit-Retrogame

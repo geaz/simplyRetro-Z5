@@ -1,0 +1,5 @@
+auto wlan0
+iface wlan0 inet dhcp
+    pre-up wpa_supplicant -B -i wlan0 -c /root/wpa_supplicant.conf
+    pre-down killall wpa_supplicant
+    wpa-conf /root/wpa_supplicant.conf

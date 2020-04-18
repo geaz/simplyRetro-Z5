@@ -1,0 +1,52 @@
+<!-- https://github.com/zefie/EmulationStation/blob/master/THEMES.md -->
+
+<theme>
+	<formatVersion>4</formatVersion>
+	<view name="system, basic, detailed, grid, video">	
+		<image name="background">
+			<color>EEEEEE</color>
+			<path>./_inc/img/bg_color.png</path>
+			<size>1 1</size>
+			<pos>0 0</pos>
+		</image>
+	</view>
+
+	<view name="system">		
+		<text name="systemInfo">
+			<fontPath>./_inc/font/RobotoCondensed-Regular.ttf</fontPath>
+			<fontSize>0.05</fontSize>
+			<backgroundColor>FFFFFF00</backgroundColor>
+			<color>000000</color>
+			<alignment>center</alignment>
+			<pos>0 0.25</pos>
+			<size>1 1</size>
+		</text>
+		
+		<carousel name="systemcarousel">
+			<pos>0 0</pos>
+			<size>1 1</size>
+			<color>EEEEEE</color>
+			<maxLogoCount>1</maxLogoCount>
+			<logoSize>0.5 0.5</logoSize>
+		</carousel>
+	</view>
+
+	<view name="basic">
+		<image name="logo">
+			<pos>0.5 0.12</pos>
+			<origin>0.5 0.5</origin>
+			<size>0.25 0</size>
+		</image>
+
+		<textlist name="gamelist">
+			<selectorColor>00000033</selectorColor>
+			<selectedColor>000000</selectedColor>
+			<primaryColor>00000055</primaryColor>
+			<secondaryColor>00000055</secondaryColor>
+			<fontPath>./_inc/font/RobotoCondensed-Regular.ttf</fontPath>
+			<fontSize >0.05</fontSize >
+			<size>1 0.69</size>
+			<pos>0 0.25</pos>
+		</textlist>
+	</view>
+</theme>
