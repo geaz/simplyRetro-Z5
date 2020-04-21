@@ -1,6 +1,4 @@
-[![3D2P](https://img.shields.io/badge/3D2P-simplyRetro%20Z5-orange.svg)](https://3d2p.net/Project/LNX9GYCQSU6RZV0DQUKTMA)
-[![Thingiverse](https://img.shields.io/badge/Thingiverse-simplyRetro%20Z5-blue.svg)](https://www.thingiverse.com/thing:3671784)
-[![Github](https://img.shields.io/badge/Github-simplyRetro%20Z5-brightgreen.svg)](https://github.com/geaz/simplyRetro-Z5)
+[![ko-fi](https://www.ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/A0A01MQZP)
 
 This repository contains everything to rebuild the *simplyRetro Z5*.
 The *Z5* is my first attempt to build a custom emulation handheld from scratch.
